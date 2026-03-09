@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Alka Jain — Associate Professor of Economics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --clr-bg: #FDFAF6;
+            --clr-bg-alt: #F5F0E8;
+            --clr-bg-card: #FFFFFF;
+            --clr-text: #2C2417;
+            --clr-text-muted: #6B5D4F;
+            --clr-accent: #8B1A1A;
+            --clr-accent-light: #B83232;
+            --clr-accent-gold: #C49A2A;
+            --clr-border: #DDD5C8;
+            --clr-border-light: #EDE8DF;
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'Source Sans 3', 'Segoe UI', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --max-w: 1100px;
+            --radius: 6px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--clr-bg);
+            color: var(--clr-text);
+            line-height: 1.7;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Noise Overlay ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* ── Top Decorative Bar ── */
+        .top-bar {
+            height: 4px;
+            background: linear-gradient(90deg, var(--clr-accent), var(--clr-accent-gold), var(--clr-accent));
+        }
+
+        /* ── Navigation ── */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(253,250,246,0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--clr-border-light);
+            padding: 0 2rem;
+        }
+
+        nav .nav-inner {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+
+        nav .nav-brand {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--clr-accent);
+            letter-spacing: 0.02em;
+            text-decoration: none;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 0.25rem;
+            list-style: none;
+        }
+
+        nav .nav-links a {
+            text-decoration: none;
+            color: var(--clr-text-muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.4rem 0.75rem;
+            border-radius: var(--radius);
+            transition: all 0.2s;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        nav .nav-links a:hover {
+            color: var(--clr-accent);
+            background: rgba(139,26,26,0.06);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-toggle span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--clr-text);
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+
+        /* ── Hero Section ── */
+        .hero {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 4rem 2rem 3rem;
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .hero-photo {
+            position: relative;
+        }
+
+        .hero-photo img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: var(--radius);
+            filter: grayscale(10%) contrast(1.02);
+            border: 3px solid var(--clr-border);
+        }
+
+        .hero-photo::after {
+            content: '';
+            position: absolute;
+            inset: 8px -8px -8px 8px;
+            border: 2px solid var(--clr-accent-gold);
+            border-radius: var(--radius);
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        .hero-info h1 {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--clr-text);
+            margin-bottom: 0.3rem;
+        }
+
+        .hero-info .designation {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: var(--clr-accent);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .hero-info .affiliation {
+            font-size: 1rem;
+            color: var(--clr-text-muted);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            max-width: 560px;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1.5rem;
+            font-size: 0.88rem;
+            color: var(--clr-text-muted);
+        }
+
+        .hero-meta .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .hero-meta .meta-icon {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            opacity: 0.6;
+        }
+
+        .hero-meta a {
+            color: var(--clr-accent);
+            text-decoration: none;
+        }
+
+        .hero-meta a:hover {
+            text-decoration: underline;
+        }
+
+        /* ── Section Styles ── */
+        .section {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 2.5rem 2rem 3rem;
+        }
+
+        .section + .section {
+            border-top: 1px solid var(--clr-border-light);
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--clr-accent-gold);
+            margin-bottom: 0.3rem;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--clr-text);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .section-intro {
+            font-size: 1.05rem;
+            color: var(--clr-text-muted);
+            max-width: 760px;
+            margin-bottom: 2rem;
+            line-height: 1.75;
+        }
+
+        /* ── Research Areas ── */
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .research-card {
+            background: var(--clr-bg-card);
+            border: 1px solid var(--clr-border-light);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            transition: all 0.25s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--clr-accent);
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+
+        .research-card:hover {
+            border-color: var(--clr-border);
+            box-shadow: 0 4px 20px rgba(44,36,23,0.06);
+        }
+
+        .research-card:hover::before {
+            opacity: 1;
+        }
+
+        .research-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--clr-text);
+        }
+
+        .research-card p {
+            font-size: 0.9rem;
+            color: var(--clr-text-muted);
+            line-height: 1.65;
+        }
+
+        /* ── Stats Bar ── */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--clr-border-light);
+            border: 1px solid var(--clr-border-light);
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-item {
+            background: var(--clr-bg-card);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--clr-accent);
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--clr-text-muted);
+            font-weight: 500;
+        }
+
+        /* ── Publications ── */
+        .pub-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .pub-item {
+            background: var(--clr-bg-card);
+            border: 1px solid var(--clr-border-light);
+            border-radius: var(--radius);
+            padding: 1.4rem 1.6rem;
+            transition: all 0.25s;
+            position: relative;
+        }
+
+        .pub-item:hover {
+            border-color: var(--clr-border);
+            box-shadow: 0 2px 12px rgba(44,36,23,0.05);
+        }
+
+        .pub-year {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--clr-accent-gold);
+            letter-spacing: 0.05em;
+            margin-bottom: 0.35rem;
+            display: inline-block;
+        }
+
+        .pub-title {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--clr-text);
+            margin-bottom: 0.3rem;
+            line-height: 1.4;
+        }
+
+        .pub-journal {
+            font-size: 0.88rem;
+            color: var(--clr-text-muted);
+            font-style: italic;
+        }
+
+        .pub-details {
+            font-size: 0.82rem;
+            color: var(--clr-text-muted);
+            margin-top: 0.3rem;
+        }
+
+        .pub-tag {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 0.2rem 0.55rem;
+            border-radius: 3px;
+            margin-top: 0.5rem;
+            margin-right: 0.3rem;
+        }
+
+        .tag-peer-reviewed {
+            background: rgba(139,26,26,0.08);
+            color: var(--clr-accent);
+        }
+
+        .tag-ugc {
+            background: rgba(196,154,42,0.12);
+            color: #8B6914;
+        }
+
+        .tag-book {
+            background: rgba(44,36,23,0.07);
+            color: var(--clr-text-muted);
+        }
+
+        /* ── Teaching ── */
+        .teaching-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .teach-card {
+            background: var(--clr-bg-card);
+            border: 1px solid var(--clr-border-light);
+            border-radius: var(--radius);
+            padding: 1.4rem 1.6rem;
+        }
+
+        .teach-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .teach-card .level-badge {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--clr-accent);
+            background: rgba(139,26,26,0.06);
+            padding: 0.15rem 0.5rem;
+            border-radius: 3px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .teach-card p {
+            font-size: 0.9rem;
+            color: var(--clr-text-muted);
+        }
+
+        /* ── Timeline ── */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 6px;
+            bottom: 6px;
+            width: 1px;
+            background: var(--clr-border);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 6px;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: var(--clr-bg);
+            border: 2px solid var(--clr-accent);
+        }
+
+        .timeline-date {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--clr-accent-gold);
+            letter-spacing: 0.05em;
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--clr-text);
+            margin-bottom: 0.15rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.88rem;
+            color: var(--clr-text-muted);
+        }
+
+        /* ── Conference / Activity Cards ── */
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .activity-card {
+            background: var(--clr-bg-card);
+            border: 1px solid var(--clr-border-light);
+            border-radius: var(--radius);
+            padding: 1.4rem 1.6rem;
+            transition: all 0.25s;
+        }
+
+        .activity-card:hover {
+            box-shadow: 0 3px 16px rgba(44,36,23,0.05);
+        }
+
+        .activity-card .ac-date {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--clr-accent-gold);
+            letter-spacing: 0.05em;
+        }
+
+        .activity-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0.3rem 0 0.3rem;
+            line-height: 1.35;
+        }
+
+        .activity-card .ac-org {
+            font-size: 0.85rem;
+            color: var(--clr-text-muted);
+            font-style: italic;
+        }
+
+        .activity-card .ac-role {
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--clr-accent);
+            margin-top: 0.4rem;
+        }
+
+        /* ── Contact ── */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-row {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+
+        .contact-row .c-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            opacity: 0.5;
+        }
+
+        .contact-row .c-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--clr-text-muted);
+            font-weight: 500;
+        }
+
+        .contact-row .c-value {
+            font-size: 0.95rem;
+            color: var(--clr-text);
+        }
+
+        .contact-row a {
+            color: var(--clr-accent);
+            text-decoration: none;
+        }
+
+        .contact-row a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-map {
+            background: var(--clr-bg-alt);
+            border-radius: var(--radius);
+            border: 1px solid var(--clr-border-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 220px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .contact-map p {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: var(--clr-text-muted);
+            font-style: italic;
+        }
+
+        /* ── Footer ── */
+        footer {
+            border-top: 1px solid var(--clr-border-light);
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.82rem;
+            color: var(--clr-text-muted);
+        }
+
+        footer .footer-inner {
+            max-width: var(--max-w);
+            margin: 0 auto;
+        }
+
+        footer .footer-name {
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--clr-text);
+        }
+
+        /* ── Animations ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero, .section {
+            animation: fadeUp 0.6s ease-out both;
+        }
+
+        .section:nth-child(2) { animation-delay: 0.1s; }
+        .section:nth-child(3) { animation-delay: 0.15s; }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 2.5rem 1.5rem 2rem;
+                gap: 2rem;
+            }
+
+            .hero-photo {
+                width: 180px;
+                margin: 0 auto;
+            }
+
+            .hero-info { text-align: center; }
+            .hero-meta { justify-content: center; }
+
+            .hero-info h1 { font-size: 2.2rem; }
+            .hero-info .designation { font-size: 1.15rem; }
+
+            .section { padding: 2rem 1.5rem; }
+            .section-title { font-size: 1.6rem; }
+
+            .stats-bar { grid-template-columns: repeat(2, 1fr); }
+            .stat-number { font-size: 1.8rem; }
+
+            .contact-grid { grid-template-columns: 1fr; }
+
+            nav .nav-links { display: none; }
+            .mobile-toggle { display: block; }
+
+            nav .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: var(--clr-bg);
+                border-bottom: 1px solid var(--clr-border);
+                padding: 1rem;
+                gap: 0.25rem;
+            }
+
+            .activity-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-bar"></div>
+
+<!-- Navigation -->
+<nav>
+    <div class="nav-inner">
+        <a href="#" class="nav-brand">Dr. Alka Jain</a>
+        <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#research">Research</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#teaching">Teaching</a></li>
+            <li><a href="#activities">Activities</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero" id="about">
+    <div class="hero-photo">
+        <img src="images/profile.png" alt="Dr. Alka Jain — Associate Professor of Economics" onerror="this.style.background='#EDE8DF';this.alt='Photo'">
+    </div>
+    <div class="hero-info">
+        <h1>Dr. Alka Jain</h1>
+        <p class="designation">Associate Professor of Economics</p>
+        <p class="affiliation">
+            Shri Atal Bihari Vajpayee Government Arts &amp; Commerce College (PMCoE), Indore, Madhya Pradesh, India<br>
+            Affiliated to Devi Ahilya Vishwavidyalaya, Indore
+        </p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <a href="mailto:profalkajain@gmail.com">profalkajain@gmail.com</a>
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                +91 94248-05448
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Indore, Madhya Pradesh
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+                Ph.D. in Economics (2016)
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- About / Bio -->
+<section class="section" id="bio">
+    <span class="section-label">// Biography</span>
+    <h2 class="section-title">About</h2>
+    <p class="section-intro">
+        Dr. Alka Jain is an Associate Professor of Economics at the prestigious Shri Atal Bihari Vajpayee Government Arts &amp; Commerce College (Prime Minister's College of Excellence), Indore, one of the leading government institutions in Madhya Pradesh. With nearly two decades of dedicated teaching and research experience since joining the college in 2006, she has established herself as a prolific scholar in Economics with over <strong>100 research publications</strong> spanning macroeconomics, Indian foreign trade policy, value-based education, tribal development, skill development, and the Indian knowledge tradition (Bhartiya Gyan Parampara).
+    </p>
+    <p class="section-intro">
+        She earned her Ph.D. in Economics in 2016 and was promoted to Associate Professor through the UGC Career Advancement Scheme in 2015. She actively contributes to the academic community through conference participation, seminar organization, research paper presentations, and institutional governance. Her work bridges contemporary economic challenges with India's cultural and philosophical heritage, reflecting a deep commitment to holistic education and national development.
+    </p>
+</section>
+
+<!-- Research Areas -->
+<section class="section" id="research">
+    <span class="section-label">// Research</span>
+    <h2 class="section-title">Research Expertise</h2>
+    <div class="research-grid">
+        <div class="research-card">
+            <h3>Indian Foreign Trade &amp; Policy</h3>
+            <p>Analysis of India's evolving trade landscape post-liberalization — export promotion strategies, exchange rate dynamics, trade barriers, and India's positioning in global markets.</p>
+        </div>
+        <div class="research-card">
+            <h3>Macroeconomics &amp; Development</h3>
+            <p>Study of economic growth patterns, FDI inflows, employment generation, labour migration, and inclusive development strategies with focus on Madhya Pradesh and tribal regions.</p>
+        </div>
+        <div class="research-card">
+            <h3>MSME Sector &amp; Skill Development</h3>
+            <p>Research on micro, small and medium enterprises in the era of globalization, skill formation, vocational education, and entrepreneurial development in India.</p>
+        </div>
+        <div class="research-card">
+            <h3>Value-Based Education</h3>
+            <p>Exploration of communication approaches in Indian value-based education, integrating traditional methods (storytelling, moral instruction) with modern digital pedagogy for holistic student development.</p>
+        </div>
+        <div class="research-card">
+            <h3>Bhartiya Gyan Parampara</h3>
+            <p>Study of India's ancient knowledge tradition — Vedic philosophy, Ayurveda, Yoga, and their relevance to the National Education Policy 2020 and contemporary academic frameworks.</p>
+        </div>
+        <div class="research-card">
+            <h3>Tribal &amp; Rural Economics</h3>
+            <p>Investigation of tribal health and healthcare initiatives, agricultural development in tribal districts, poverty dynamics, and sustainable economic growth in Madhya Pradesh.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Publications -->
+<section class="section" id="publications">
+    <span class="section-label">// Publications</span>
+    <h2 class="section-title">Selected Publications</h2>
+
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-number">100+</div>
+            <div class="stat-label">Research Papers</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">4</div>
+            <div class="stat-label">Papers in 2024–25</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">45</div>
+            <div class="stat-label">A/R Score (2024–25)</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">19+</div>
+            <div class="stat-label">Years of Service</div>
+        </div>
+    </div>
+
+    <p class="section-intro" style="margin-bottom:1.5rem;">
+        Dr. Jain has authored over 100 research papers published in peer-reviewed journals, UGC-listed journals, edited book volumes, and conference proceedings. Below is a selection of recent publications from the academic year 2024–25.
+    </p>
+
+    <ul class="pub-list">
+        <li class="pub-item">
+            <span class="pub-year">AUG 2024</span>
+            <div class="pub-title">भारतीय विदेशी व्यापार की वर्तमान स्थिति: चुनौतियाँ एवं संभावनाएँ</div>
+            <div class="pub-title" style="font-size:0.95rem;font-weight:400;color:var(--clr-text-muted);margin-top:0.15rem;">(Current Status of India's Foreign Trade: Challenges and Prospects)</div>
+            <div class="pub-journal">Journal of Madhya Pradesh Economic Association (MPEA)</div>
+            <div class="pub-details">ISSN: 2277-1123 &nbsp;|&nbsp; Vol. XXXIII, No. 1 &nbsp;|&nbsp; Pages 215–229 &nbsp;|&nbsp; Sole Author</div>
+            <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            <span class="pub-tag tag-ugc">UGC Listed</span>
+        </li>
+
+        <li class="pub-item">
+            <span class="pub-year">AUG 2024</span>
+            <div class="pub-title">Value-Based Education and Communication Approaches in the Indian Context</div>
+            <div class="pub-journal">Swadeshi Research Foundation — A Monthly Journal of Multidisciplinary Research</div>
+            <div class="pub-details">ISSN: 2394-3580 &nbsp;|&nbsp; Vol. 11, No. 10 &nbsp;|&nbsp; Impact Factor: 5.2 &nbsp;|&nbsp; Pages 10–13 &nbsp;|&nbsp; Sole Author</div>
+            <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            <span class="pub-tag tag-ugc">Ex-UGC S.N. 4990</span>
+        </li>
+
+        <li class="pub-item">
+            <span class="pub-year">MAY 2024</span>
+            <div class="pub-title">भारतीय ज्ञान परम्परा एवं राष्ट्रीय शिक्षा नीति</div>
+            <div class="pub-title" style="font-size:0.95rem;font-weight:400;color:var(--clr-text-muted);margin-top:0.15rem;">(Indian Knowledge Tradition and National Education Policy)</div>
+            <div class="pub-journal">Edited Book: भारतीय ज्ञान परंपरा के विविध संदर्भ (Diverse Contexts of Indian Knowledge Tradition)</div>
+            <div class="pub-details">ISBN: 978-93-93690-23-4 &nbsp;|&nbsp; Pages 48–51 &nbsp;|&nbsp; Sole Author</div>
+            <span class="pub-tag tag-book">Book Chapter</span>
+        </li>
+
+        <li class="pub-item">
+            <span class="pub-year">MAY 2024</span>
+            <div class="pub-title">भारतीय ज्ञान परंपरा की वर्तमान सन्दर्भों में प्रासंगिकता</div>
+            <div class="pub-title" style="font-size:0.95rem;font-weight:400;color:var(--clr-text-muted);margin-top:0.15rem;">(Relevance of Indian Knowledge Tradition in Contemporary Contexts)</div>
+            <div class="pub-journal">GACC Journal — A Quarterly Journal, Shri Atal Bihari Vajpayee Govt. Arts &amp; Commerce College, Indore</div>
+            <div class="pub-details">E-ISSN: 2454-2717 &nbsp;|&nbsp; Vol. 1, Special Issue &nbsp;|&nbsp; Pages 76–83 &nbsp;|&nbsp; Sole Author</div>
+            <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+        </li>
+    </ul>
+
+    <p style="font-size:0.88rem;color:var(--clr-text-muted);margin-top:1.5rem;font-style:italic;">
+        * The above list represents recent publications from 2024–25 only. Dr. Jain's full publication record includes 100+ papers across leading economics journals, national seminars, and edited volumes spanning topics in trade policy, development economics, education, and Indian knowledge systems.
+    </p>
+</section>
+
+<!-- Teaching -->
+<section class="section" id="teaching">
+    <span class="section-label">// Teaching</span>
+    <h2 class="section-title">Teaching &amp; Academic Engagement</h2>
+    <p class="section-intro">
+        Dr. Jain teaches Economics at both the undergraduate and postgraduate levels, maintaining an excellent teaching attendance record of approximately 83.63% across all assigned classes. Her courses span microeconomics, macroeconomics, Indian economy, and development economics.
+    </p>
+
+    <div class="teaching-grid">
+        <div class="teach-card">
+            <span class="level-badge">Postgraduate</span>
+            <h3>M.A. Economics</h3>
+            <p>Advanced coursework in economic theory, Indian economic policy, international trade, and quantitative methods. Lectures and seminar-based instruction for postgraduate scholars.</p>
+        </div>
+        <div class="teach-card">
+            <span class="level-badge">Undergraduate</span>
+            <h3>B.A. Economics (Major &amp; Minor)</h3>
+            <p>Foundational and intermediate courses in micro and macroeconomics, Indian economy, and development economics for undergraduate students across multiple sections.</p>
+        </div>
+        <div class="teach-card">
+            <span class="level-badge">Examination Duties</span>
+            <h3>Assessment &amp; Evaluation</h3>
+            <p>Responsibilities include university question paper setting, evaluation and grading of answer notebooks, and invigilation duties for college and university examinations.</p>
+        </div>
+        <div class="teach-card">
+            <span class="level-badge">Research Guidance</span>
+            <h3>UG Projects &amp; Mentorship</h3>
+            <p>Actively involved in guiding undergraduate research projects and mentoring students in academic writing, research methodology, and career development.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Professional Activities -->
+<section class="section" id="activities">
+    <span class="section-label">// Activities</span>
+    <h2 class="section-title">Conferences, Seminars &amp; Professional Activities</h2>
+
+    <div class="activity-grid">
+        <div class="activity-card">
+            <span class="ac-date">17–22 FEB 2025</span>
+            <h3>6-Day Workshop on Research Papers, Articles, Research Proposals &amp; Seminars</h3>
+            <p class="ac-org">PMCoE, Shri Atal Bihari Vajpayee Govt. Arts &amp; Commerce College, Indore (Under IQAC)</p>
+            <p class="ac-role">Participant — Certified</p>
+        </div>
+
+        <div class="activity-card">
+            <span class="ac-date">03 MAR 2025</span>
+            <h3>National Seminar: "Various Dimensions of Tourism in Present Perspective"</h3>
+            <p class="ac-org">Dept. of History, PMCoE, Indore — Funded by Dept. of Higher Education</p>
+            <p class="ac-role">Paper Presenter / Participant</p>
+        </div>
+
+        <div class="activity-card">
+            <span class="ac-date">30–31 AUG 2024</span>
+            <h3>XXXIII Annual Conference of MPEA — "Pathways to Sustainability: Building Sustainable India — Challenges &amp; Strategies"</h3>
+            <p class="ac-org">School of Economics, Devi Ahilya Vishwavidyalaya, Indore — Organized with UGC-SAP, CPEPA, STRIDE, RIS, PathS</p>
+            <p class="ac-role">Registered Delegate &amp; Participant</p>
+        </div>
+
+        <div class="activity-card">
+            <span class="ac-date">29 MAY 2024</span>
+            <h3>National Webinar: "भारतीय ज्ञान परंपरा के विविध संदर्भ" (Diverse Contexts of Indian Knowledge Tradition)</h3>
+            <p class="ac-org">Shri Atal Bihari Vajpayee Govt. Arts &amp; Commerce College, Indore — Under IQAC &amp; Sanskrit Department, M.P. Government</p>
+            <p class="ac-role">Research Paper Presenter</p>
+        </div>
+
+        <div class="activity-card">
+            <span class="ac-date">28 MAY 2024</span>
+            <h3>National Webinar: "Bhartiya Gyan Parampara ke Vividh Sandarbh"</h3>
+            <p class="ac-org">Dept. of Hindi, Govt. Girls PG College, Ratlam (M.P.) — In association with IQAC</p>
+            <p class="ac-role">Paper Presenter — शिक्षा नीति (Education Policy)</p>
+        </div>
+
+        <div class="activity-card">
+            <span class="ac-date">12 AUG 2024</span>
+            <h3>One Day National Webinar: "Objectives and Impact of Value Based Education"</h3>
+            <p class="ac-org">Government College, Khilchipur (M.P.) — Sponsored by Dept. of Higher Education, Govt. of Madhya Pradesh</p>
+            <p class="ac-role">Paper Presenter / Participant</p>
+        </div>
+    </div>
+
+    <h3 style="font-family:var(--font-display);font-size:1.3rem;margin-top:2.5rem;margin-bottom:1.2rem;">Administrative &amp; Service Contributions</h3>
+    <div class="teaching-grid">
+        <div class="teach-card">
+            <span class="level-badge">Administration</span>
+            <h3>College Governance</h3>
+            <p>Active role in library committee, anti-ragging cell, women grievance cell, college event management, and institutional planning.</p>
+        </div>
+        <div class="teach-card">
+            <span class="level-badge">Extension</span>
+            <h3>Co-curricular &amp; Field Activities</h3>
+            <p>Involvement in plantation drives, student co-curricular programs, and self-defense training coordination for women students (Oct 2024).</p>
+        </div>
+    </div>
+</section>
+
+<!-- Career Timeline -->
+<section class="section" id="career">
+    <span class="section-label">// Career</span>
+    <h2 class="section-title">Academic Career</h2>
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-date">2015 — PRESENT</div>
+            <div class="timeline-title">Associate Professor of Economics</div>
+            <div class="timeline-desc">PMCoE, Shri Atal Bihari Vajpayee Govt. Arts &amp; Commerce College, Indore — Promoted via UGC Career Advancement Scheme (CAS)</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">2016</div>
+            <div class="timeline-title">Ph.D. in Economics</div>
+            <div class="timeline-desc">Doctoral degree awarded on 30 January 2016 — Devi Ahilya Vishwavidyalaya, Indore</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">2006 — 2015</div>
+            <div class="timeline-title">Assistant Professor of Economics (PSC Selected)</div>
+            <div class="timeline-desc">Joined Govt. Arts &amp; Commerce College, Indore on 20 July 2006 through Madhya Pradesh Public Service Commission selection</div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section class="section" id="contact">
+    <span class="section-label">// Contact</span>
+    <h2 class="section-title">Get in Touch</h2>
+    <div class="contact-grid">
+        <div class="contact-info">
+            <div class="contact-row">
+                <svg class="c-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <div>
+                    <div class="c-label">Email</div>
+                    <div class="c-value"><a href="mailto:profalkajain@gmail.com">profalkajain@gmail.com</a></div>
+                </div>
+            </div>
+            <div class="contact-row">
+                <svg class="c-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                <div>
+                    <div class="c-label">Phone</div>
+                    <div class="c-value">+91 94248-05448</div>
+                </div>
+            </div>
+            <div class="contact-row">
+                <svg class="c-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <div>
+                    <div class="c-label">Office Address</div>
+                    <div class="c-value">
+                        Department of Economics<br>
+                        PMCoE, Shri Atal Bihari Vajpayee<br>
+                        Govt. Arts &amp; Commerce College<br>
+                        A.B. Road, Mankareshwar Dhiraha<br>
+                        Indore — 452017, Madhya Pradesh, India
+                    </div>
+                </div>
+            </div>
+            <div class="contact-row">
+                <svg class="c-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <div>
+                    <div class="c-label">Residential Address</div>
+                    <div class="c-value">
+                        198, Sachchidanand Nagar, Keshar Bag Road<br>
+                        Indore — 452009, Madhya Pradesh, India
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contact-map">
+            <div>
+                <p>"Education is not just about academic excellence, but the cultivation of moral, ethical, and spiritual values in students — aiming for their holistic development."</p>
+                <p style="font-size:0.85rem;margin-top:0.75rem;font-style:normal;color:var(--clr-accent);">— Dr. Alka Jain</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-inner">
+        <p>&copy; 2025 <span class="footer-name">Dr. Alka Jain</span> &nbsp;·&nbsp; Associate Professor of Economics &nbsp;·&nbsp; PMCoE, SABV GACC, Indore</p>
+        <p style="margin-top:0.3rem;font-size:0.75rem;">Employee ID: 1731 &nbsp;|&nbsp; Treasury Code: 190002617</p>
+    </div>
+</footer>
+
+</body>
+</html>
