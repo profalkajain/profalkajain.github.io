@@ -27,7 +27,6 @@
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
         html { scroll-behavior: smooth; }
 
         body {
@@ -39,7 +38,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* ── Noise Overlay ── */
         body::before {
             content: '';
             position: fixed;
@@ -50,667 +48,146 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
         }
 
-        /* ── Top Decorative Bar ── */
-        .top-bar {
-            height: 4px;
-            background: linear-gradient(90deg, var(--clr-accent), var(--clr-accent-gold), var(--clr-accent));
-        }
+        .top-bar { height: 4px; background: linear-gradient(90deg, var(--clr-accent), var(--clr-accent-gold), var(--clr-accent)); }
 
-        /* ── Navigation ── */
         nav {
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            position: sticky; top: 0; z-index: 100;
             background: rgba(253,250,246,0.92);
             backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--clr-border-light);
             padding: 0 2rem;
         }
+        nav .nav-inner { max-width: var(--max-w); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+        nav .nav-brand { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: var(--clr-accent); text-decoration: none; }
+        nav .nav-links { display: flex; gap: 0.25rem; list-style: none; }
+        nav .nav-links a { text-decoration: none; color: var(--clr-text-muted); font-size: 0.82rem; font-weight: 500; padding: 0.4rem 0.65rem; border-radius: var(--radius); transition: all 0.2s; letter-spacing: 0.03em; text-transform: uppercase; }
+        nav .nav-links a:hover { color: var(--clr-accent); background: rgba(139,26,26,0.06); }
+        .mobile-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+        .mobile-toggle span { display: block; width: 22px; height: 2px; background: var(--clr-text); margin: 5px 0; }
+
+        .hero { max-width: var(--max-w); margin: 0 auto; padding: 4rem 2rem 3rem; display: grid; grid-template-columns: 240px 1fr; gap: 3rem; align-items: start; }
+        .hero-photo { position: relative; }
+        .hero-photo img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); filter: grayscale(10%) contrast(1.02); border: 3px solid var(--clr-border); }
+        .hero-photo::after { content: ''; position: absolute; inset: 8px -8px -8px 8px; border: 2px solid var(--clr-accent-gold); border-radius: var(--radius); z-index: -1; opacity: 0.4; }
+        .hero-info h1 { font-family: var(--font-display); font-size: 3rem; font-weight: 700; line-height: 1.15; color: var(--clr-text); margin-bottom: 0.3rem; }
+        .hero-info .designation { font-family: var(--font-display); font-size: 1.35rem; font-weight: 500; color: var(--clr-accent); font-style: italic; margin-bottom: 1rem; }
+        .hero-info .affiliation { font-size: 1rem; color: var(--clr-text-muted); line-height: 1.6; margin-bottom: 1.5rem; max-width: 580px; }
+        .hero-meta { display: flex; flex-wrap: wrap; gap: 0.6rem 1.5rem; font-size: 0.88rem; color: var(--clr-text-muted); }
+        .hero-meta .meta-item { display: flex; align-items: center; gap: 0.4rem; }
+        .hero-meta .meta-icon { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.6; }
+        .hero-meta a { color: var(--clr-accent); text-decoration: none; }
+        .hero-meta a:hover { text-decoration: underline; }
+
+        .section { max-width: var(--max-w); margin: 0 auto; padding: 2.5rem 2rem 3rem; }
+        .section + .section { border-top: 1px solid var(--clr-border-light); }
+        .section-label { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--clr-accent-gold); margin-bottom: 0.3rem; }
+        .section-title { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--clr-text); margin-bottom: 1.5rem; line-height: 1.2; }
+        .section-intro { font-size: 1.05rem; color: var(--clr-text-muted); max-width: 760px; margin-bottom: 2rem; line-height: 1.75; }
+
+        .edu-table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; background: var(--clr-bg-card); border: 1px solid var(--clr-border-light); border-radius: var(--radius); overflow: hidden; }
+        .edu-table th { background: var(--clr-bg-alt); font-family: var(--font-display); font-size: 0.9rem; font-weight: 600; text-align: left; padding: 0.75rem 1rem; border-bottom: 1px solid var(--clr-border-light); }
+        .edu-table td { padding: 0.7rem 1rem; font-size: 0.9rem; border-bottom: 1px solid var(--clr-border-light); color: var(--clr-text-muted); vertical-align: top; }
+        .edu-table tr:last-child td { border-bottom: none; }
+        .edu-table .degree-name { font-weight: 600; color: var(--clr-text); }
+
+        .research-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+        .research-card { background: var(--clr-bg-card); border: 1px solid var(--clr-border-light); border-radius: var(--radius); padding: 1.5rem; transition: all 0.25s; position: relative; overflow: hidden; }
+        .research-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--clr-accent); opacity: 0; transition: opacity 0.25s; }
+        .research-card:hover { border-color: var(--clr-border); box-shadow: 0 4px 20px rgba(44,36,23,0.06); }
+        .research-card:hover::before { opacity: 1; }
+        .research-card h3 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .research-card p { font-size: 0.9rem; color: var(--clr-text-muted); line-height: 1.65; }
+
+        .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--clr-border-light); border: 1px solid var(--clr-border-light); border-radius: var(--radius); overflow: hidden; margin-bottom: 2.5rem; }
+        .stat-item { background: var(--clr-bg-card); padding: 1.5rem; text-align: center; }
+        .stat-number { font-family: var(--font-display); font-size: 2.4rem; font-weight: 700; color: var(--clr-accent); line-height: 1; margin-bottom: 0.3rem; }
+        .stat-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--clr-text-muted); font-weight: 500; }
+
+        .pub-year-group { margin-bottom: 2rem; }
+        .pub-year-heading { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em; color: var(--clr-accent); text-transform: uppercase; padding-bottom: 0.5rem; border-bottom: 2px solid var(--clr-accent); margin-bottom: 1rem; display: inline-block; }
+        .pub-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+        .pub-item { background: var(--clr-bg-card); border: 1px solid var(--clr-border-light); border-radius: var(--radius); padding: 1.3rem 1.5rem; transition: all 0.25s; }
+        .pub-item:hover { border-color: var(--clr-border); box-shadow: 0 2px 12px rgba(44,36,23,0.05); }
+        .pub-num { font-family: var(--font-mono); font-size: 0.68rem; color: var(--clr-accent-gold); letter-spacing: 0.05em; margin-bottom: 0.2rem; display: inline-block; }
+        .pub-title { font-family: var(--font-display); font-size: 1.12rem; font-weight: 600; color: var(--clr-text); margin-bottom: 0.25rem; line-height: 1.4; }
+        .pub-title-en { font-family: var(--font-display); font-size: 0.92rem; font-weight: 400; color: var(--clr-text-muted); margin-bottom: 0.3rem; line-height: 1.4; font-style: italic; }
+        .pub-journal { font-size: 0.88rem; color: var(--clr-text-muted); font-style: italic; }
+        .pub-details { font-size: 0.82rem; color: var(--clr-text-muted); margin-top: 0.25rem; }
+        .pub-tag { display: inline-block; font-size: 0.66rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.18rem 0.5rem; border-radius: 3px; margin-top: 0.45rem; margin-right: 0.25rem; }
+        .tag-peer-reviewed { background: rgba(139,26,26,0.08); color: var(--clr-accent); }
+        .tag-ugc { background: rgba(196,154,42,0.12); color: #8B6914; }
+        .tag-book { background: rgba(44,36,23,0.07); color: var(--clr-text-muted); }
+
+        .teaching-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; }
+        .teach-card { background: var(--clr-bg-card); border: 1px solid var(--clr-border-light); border-radius: var(--radius); padding: 1.4rem 1.6rem; }
+        .teach-card h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .teach-card .level-badge { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--clr-accent); background: rgba(139,26,26,0.06); padding: 0.15rem 0.5rem; border-radius: 3px; display: inline-block; margin-bottom: 0.5rem; }
+        .teach-card p { font-size: 0.9rem; color: var(--clr-text-muted); }
+
+        .timeline { position: relative; padding-left: 2rem; }
+        .timeline::before { content: ''; position: absolute; left: 5px; top: 6px; bottom: 6px; width: 1px; background: var(--clr-border); }
+        .timeline-item { position: relative; padding-bottom: 2rem; }
+        .timeline-item:last-child { padding-bottom: 0; }
+        .timeline-item::before { content: ''; position: absolute; left: -2rem; top: 6px; width: 11px; height: 11px; border-radius: 50%; background: var(--clr-bg); border: 2px solid var(--clr-accent); }
+        .timeline-date { font-family: var(--font-mono); font-size: 0.72rem; color: var(--clr-accent-gold); letter-spacing: 0.05em; margin-bottom: 0.2rem; }
+        .timeline-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: var(--clr-text); margin-bottom: 0.15rem; }
+        .timeline-desc { font-size: 0.88rem; color: var(--clr-text-muted); }
+
+        .activity-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem; }
+        .activity-card { background: var(--clr-bg-card); border: 1px solid var(--clr-border-light); border-radius: var(--radius); padding: 1.3rem 1.5rem; transition: all 0.25s; }
+        .activity-card:hover { box-shadow: 0 3px 16px rgba(44,36,23,0.05); }
+        .activity-card .ac-date { font-family: var(--font-mono); font-size: 0.72rem; color: var(--clr-accent-gold); letter-spacing: 0.05em; }
+        .activity-card h3 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; margin: 0.25rem 0; line-height: 1.35; }
+        .activity-card .ac-org { font-size: 0.85rem; color: var(--clr-text-muted); font-style: italic; }
+        .activity-card .ac-role { font-size: 0.76rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--clr-accent); margin-top: 0.35rem; }
+
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+        .contact-row { display: flex; gap: 0.75rem; align-items: flex-start; }
+        .contact-row .c-icon { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; opacity: 0.5; }
+        .contact-row .c-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--clr-text-muted); font-weight: 500; }
+        .contact-row .c-value { font-size: 0.95rem; color: var(--clr-text); }
+        .contact-row a { color: var(--clr-accent); text-decoration: none; }
+        .contact-row a:hover { text-decoration: underline; }
+
+        .contact-quote { background: var(--clr-bg-alt); border-radius: var(--radius); border: 1px solid var(--clr-border-light); display: flex; align-items: center; justify-content: center; min-height: 220px; padding: 2rem; text-align: center; }
+        .contact-quote p { font-family: var(--font-display); font-size: 1.1rem; color: var(--clr-text-muted); font-style: italic; }
+
+        footer { border-top: 1px solid var(--clr-border-light); padding: 2rem; text-align: center; font-size: 0.82rem; color: var(--clr-text-muted); }
+        footer .footer-inner { max-width: var(--max-w); margin: 0 auto; }
+        footer .footer-name { font-family: var(--font-display); font-weight: 600; color: var(--clr-text); }
+
+        .sub-heading { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin: 2.5rem 0 1.2rem; color: var(--clr-text); padding-bottom: 0.4rem; border-bottom: 1px solid var(--clr-border-light); }
+        .sub-heading:first-of-type { margin-top: 0; }
 
-        nav .nav-inner {
-            max-width: var(--max-w);
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 60px;
-        }
+        .pub-table-wrap { overflow-x: auto; margin-bottom: 1.5rem; }
+        .pub-table { width: 100%; border-collapse: collapse; background: var(--clr-bg-card); border: 1px solid var(--clr-border-light); border-radius: var(--radius); overflow: hidden; min-width: 700px; }
+        .pub-table th { background: var(--clr-bg-alt); font-family: var(--font-display); font-size: 0.85rem; font-weight: 600; text-align: left; padding: 0.65rem 0.8rem; border-bottom: 1px solid var(--clr-border-light); white-space: nowrap; }
+        .pub-table td { padding: 0.6rem 0.8rem; font-size: 0.85rem; border-bottom: 1px solid var(--clr-border-light); color: var(--clr-text-muted); vertical-align: top; }
+        .pub-table tr:last-child td { border-bottom: none; }
+        .pub-table .paper-title { font-weight: 500; color: var(--clr-text); min-width: 200px; }
 
-        nav .nav-brand {
-            font-family: var(--font-display);
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: var(--clr-accent);
-            letter-spacing: 0.02em;
-            text-decoration: none;
-        }
+        .note-box { font-size: 0.92rem; color: var(--clr-text-muted); padding: 1.2rem; background: var(--clr-bg-alt); border-radius: var(--radius); border-left: 3px solid var(--clr-accent-gold); line-height: 1.7; margin-top: 1.5rem; }
 
-        nav .nav-links {
-            display: flex;
-            gap: 0.25rem;
-            list-style: none;
-        }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .hero, .section { animation: fadeUp 0.6s ease-out both; }
 
-        nav .nav-links a {
-            text-decoration: none;
-            color: var(--clr-text-muted);
-            font-size: 0.85rem;
-            font-weight: 500;
-            padding: 0.4rem 0.75rem;
-            border-radius: var(--radius);
-            transition: all 0.2s;
-            letter-spacing: 0.03em;
-            text-transform: uppercase;
-        }
-
-        nav .nav-links a:hover {
-            color: var(--clr-accent);
-            background: rgba(139,26,26,0.06);
-        }
-
-        .mobile-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        .mobile-toggle span {
-            display: block;
-            width: 22px;
-            height: 2px;
-            background: var(--clr-text);
-            margin: 5px 0;
-            transition: 0.3s;
-        }
-
-        /* ── Hero Section ── */
-        .hero {
-            max-width: var(--max-w);
-            margin: 0 auto;
-            padding: 4rem 2rem 3rem;
-            display: grid;
-            grid-template-columns: 240px 1fr;
-            gap: 3rem;
-            align-items: start;
-        }
-
-        .hero-photo {
-            position: relative;
-        }
-
-        .hero-photo img {
-            width: 100%;
-            aspect-ratio: 1;
-            object-fit: cover;
-            border-radius: var(--radius);
-            filter: grayscale(10%) contrast(1.02);
-            border: 3px solid var(--clr-border);
-        }
-
-        .hero-photo::after {
-            content: '';
-            position: absolute;
-            inset: 8px -8px -8px 8px;
-            border: 2px solid var(--clr-accent-gold);
-            border-radius: var(--radius);
-            z-index: -1;
-            opacity: 0.4;
-        }
-
-        .hero-info h1 {
-            font-family: var(--font-display);
-            font-size: 3rem;
-            font-weight: 700;
-            line-height: 1.15;
-            color: var(--clr-text);
-            margin-bottom: 0.3rem;
-        }
-
-        .hero-info .designation {
-            font-family: var(--font-display);
-            font-size: 1.35rem;
-            font-weight: 500;
-            color: var(--clr-accent);
-            font-style: italic;
-            margin-bottom: 1rem;
-        }
-
-        .hero-info .affiliation {
-            font-size: 1rem;
-            color: var(--clr-text-muted);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            max-width: 560px;
-        }
-
-        .hero-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem 1.5rem;
-            font-size: 0.88rem;
-            color: var(--clr-text-muted);
-        }
-
-        .hero-meta .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .hero-meta .meta-icon {
-            width: 16px;
-            height: 16px;
-            flex-shrink: 0;
-            opacity: 0.6;
-        }
-
-        .hero-meta a {
-            color: var(--clr-accent);
-            text-decoration: none;
-        }
-
-        .hero-meta a:hover {
-            text-decoration: underline;
-        }
-
-        /* ── Section Styles ── */
-        .section {
-            max-width: var(--max-w);
-            margin: 0 auto;
-            padding: 2.5rem 2rem 3rem;
-        }
-
-        .section + .section {
-            border-top: 1px solid var(--clr-border-light);
-        }
-
-        .section-label {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--clr-accent-gold);
-            margin-bottom: 0.3rem;
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--clr-text);
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .section-intro {
-            font-size: 1.05rem;
-            color: var(--clr-text-muted);
-            max-width: 760px;
-            margin-bottom: 2rem;
-            line-height: 1.75;
-        }
-
-        /* ── Research Areas ── */
-        .research-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .research-card {
-            background: var(--clr-bg-card);
-            border: 1px solid var(--clr-border-light);
-            border-radius: var(--radius);
-            padding: 1.5rem;
-            transition: all 0.25s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .research-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 3px;
-            height: 100%;
-            background: var(--clr-accent);
-            opacity: 0;
-            transition: opacity 0.25s;
-        }
-
-        .research-card:hover {
-            border-color: var(--clr-border);
-            box-shadow: 0 4px 20px rgba(44,36,23,0.06);
-        }
-
-        .research-card:hover::before {
-            opacity: 1;
-        }
-
-        .research-card h3 {
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--clr-text);
-        }
-
-        .research-card p {
-            font-size: 0.9rem;
-            color: var(--clr-text-muted);
-            line-height: 1.65;
-        }
-
-        /* ── Stats Bar ── */
-        .stats-bar {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1px;
-            background: var(--clr-border-light);
-            border: 1px solid var(--clr-border-light);
-            border-radius: var(--radius);
-            overflow: hidden;
-            margin-bottom: 2.5rem;
-        }
-
-        .stat-item {
-            background: var(--clr-bg-card);
-            padding: 1.5rem;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-family: var(--font-display);
-            font-size: 2.4rem;
-            font-weight: 700;
-            color: var(--clr-accent);
-            line-height: 1;
-            margin-bottom: 0.3rem;
-        }
-
-        .stat-label {
-            font-size: 0.78rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--clr-text-muted);
-            font-weight: 500;
-        }
-
-        /* ── Publications ── */
-        .pub-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .pub-item {
-            background: var(--clr-bg-card);
-            border: 1px solid var(--clr-border-light);
-            border-radius: var(--radius);
-            padding: 1.4rem 1.6rem;
-            transition: all 0.25s;
-            position: relative;
-        }
-
-        .pub-item:hover {
-            border-color: var(--clr-border);
-            box-shadow: 0 2px 12px rgba(44,36,23,0.05);
-        }
-
-        .pub-year {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--clr-accent-gold);
-            letter-spacing: 0.05em;
-            margin-bottom: 0.35rem;
-            display: inline-block;
-        }
-
-        .pub-title {
-            font-family: var(--font-display);
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: var(--clr-text);
-            margin-bottom: 0.3rem;
-            line-height: 1.4;
-        }
-
-        .pub-journal {
-            font-size: 0.88rem;
-            color: var(--clr-text-muted);
-            font-style: italic;
-        }
-
-        .pub-details {
-            font-size: 0.82rem;
-            color: var(--clr-text-muted);
-            margin-top: 0.3rem;
-        }
-
-        .pub-tag {
-            display: inline-block;
-            font-size: 0.68rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            padding: 0.2rem 0.55rem;
-            border-radius: 3px;
-            margin-top: 0.5rem;
-            margin-right: 0.3rem;
-        }
-
-        .tag-peer-reviewed {
-            background: rgba(139,26,26,0.08);
-            color: var(--clr-accent);
-        }
-
-        .tag-ugc {
-            background: rgba(196,154,42,0.12);
-            color: #8B6914;
-        }
-
-        .tag-book {
-            background: rgba(44,36,23,0.07);
-            color: var(--clr-text-muted);
-        }
-
-        /* ── Teaching ── */
-        .teaching-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .teach-card {
-            background: var(--clr-bg-card);
-            border: 1px solid var(--clr-border-light);
-            border-radius: var(--radius);
-            padding: 1.4rem 1.6rem;
-        }
-
-        .teach-card h3 {
-            font-family: var(--font-display);
-            font-size: 1.15rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .teach-card .level-badge {
-            font-size: 0.72rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--clr-accent);
-            background: rgba(139,26,26,0.06);
-            padding: 0.15rem 0.5rem;
-            border-radius: 3px;
-            display: inline-block;
-            margin-bottom: 0.5rem;
-        }
-
-        .teach-card p {
-            font-size: 0.9rem;
-            color: var(--clr-text-muted);
-        }
-
-        /* ── Timeline ── */
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 5px;
-            top: 6px;
-            bottom: 6px;
-            width: 1px;
-            background: var(--clr-border);
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-bottom: 2rem;
-        }
-
-        .timeline-item:last-child {
-            padding-bottom: 0;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -2rem;
-            top: 6px;
-            width: 11px;
-            height: 11px;
-            border-radius: 50%;
-            background: var(--clr-bg);
-            border: 2px solid var(--clr-accent);
-        }
-
-        .timeline-date {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--clr-accent-gold);
-            letter-spacing: 0.05em;
-            margin-bottom: 0.2rem;
-        }
-
-        .timeline-title {
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--clr-text);
-            margin-bottom: 0.15rem;
-        }
-
-        .timeline-desc {
-            font-size: 0.88rem;
-            color: var(--clr-text-muted);
-        }
-
-        /* ── Conference / Activity Cards ── */
-        .activity-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .activity-card {
-            background: var(--clr-bg-card);
-            border: 1px solid var(--clr-border-light);
-            border-radius: var(--radius);
-            padding: 1.4rem 1.6rem;
-            transition: all 0.25s;
-        }
-
-        .activity-card:hover {
-            box-shadow: 0 3px 16px rgba(44,36,23,0.05);
-        }
-
-        .activity-card .ac-date {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--clr-accent-gold);
-            letter-spacing: 0.05em;
-        }
-
-        .activity-card h3 {
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin: 0.3rem 0 0.3rem;
-            line-height: 1.35;
-        }
-
-        .activity-card .ac-org {
-            font-size: 0.85rem;
-            color: var(--clr-text-muted);
-            font-style: italic;
-        }
-
-        .activity-card .ac-role {
-            font-size: 0.78rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--clr-accent);
-            margin-top: 0.4rem;
-        }
-
-        /* ── Contact ── */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .contact-row {
-            display: flex;
-            gap: 0.75rem;
-            align-items: flex-start;
-        }
-
-        .contact-row .c-icon {
-            width: 20px;
-            height: 20px;
-            flex-shrink: 0;
-            margin-top: 2px;
-            opacity: 0.5;
-        }
-
-        .contact-row .c-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--clr-text-muted);
-            font-weight: 500;
-        }
-
-        .contact-row .c-value {
-            font-size: 0.95rem;
-            color: var(--clr-text);
-        }
-
-        .contact-row a {
-            color: var(--clr-accent);
-            text-decoration: none;
-        }
-
-        .contact-row a:hover {
-            text-decoration: underline;
-        }
-
-        .contact-map {
-            background: var(--clr-bg-alt);
-            border-radius: var(--radius);
-            border: 1px solid var(--clr-border-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 220px;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .contact-map p {
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            color: var(--clr-text-muted);
-            font-style: italic;
-        }
-
-        /* ── Footer ── */
-        footer {
-            border-top: 1px solid var(--clr-border-light);
-            padding: 2rem;
-            text-align: center;
-            font-size: 0.82rem;
-            color: var(--clr-text-muted);
-        }
-
-        footer .footer-inner {
-            max-width: var(--max-w);
-            margin: 0 auto;
-        }
-
-        footer .footer-name {
-            font-family: var(--font-display);
-            font-weight: 600;
-            color: var(--clr-text);
-        }
-
-        /* ── Animations ── */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hero, .section {
-            animation: fadeUp 0.6s ease-out both;
-        }
-
-        .section:nth-child(2) { animation-delay: 0.1s; }
-        .section:nth-child(3) { animation-delay: 0.15s; }
-
-        /* ── Responsive ── */
         @media (max-width: 768px) {
-            .hero {
-                grid-template-columns: 1fr;
-                padding: 2.5rem 1.5rem 2rem;
-                gap: 2rem;
-            }
-
-            .hero-photo {
-                width: 180px;
-                margin: 0 auto;
-            }
-
+            .hero { grid-template-columns: 1fr; padding: 2.5rem 1.5rem 2rem; gap: 2rem; }
+            .hero-photo { width: 180px; margin: 0 auto; }
             .hero-info { text-align: center; }
             .hero-meta { justify-content: center; }
-
             .hero-info h1 { font-size: 2.2rem; }
             .hero-info .designation { font-size: 1.15rem; }
-
             .section { padding: 2rem 1.5rem; }
             .section-title { font-size: 1.6rem; }
-
             .stats-bar { grid-template-columns: repeat(2, 1fr); }
             .stat-number { font-size: 1.8rem; }
-
             .contact-grid { grid-template-columns: 1fr; }
-
             nav .nav-links { display: none; }
             .mobile-toggle { display: block; }
-
-            nav .nav-links.open {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                right: 0;
-                background: var(--clr-bg);
-                border-bottom: 1px solid var(--clr-border);
-                padding: 1rem;
-                gap: 0.25rem;
-            }
-
-            .activity-grid {
-                grid-template-columns: 1fr;
-            }
+            nav .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 60px; left: 0; right: 0; background: var(--clr-bg); border-bottom: 1px solid var(--clr-border); padding: 1rem; gap: 0.25rem; }
+            .activity-grid, .research-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -718,7 +195,6 @@
 
 <div class="top-bar"></div>
 
-<!-- Navigation -->
 <nav>
     <div class="nav-inner">
         <a href="#" class="nav-brand">Dr. Alka Jain</a>
@@ -727,6 +203,7 @@
         </button>
         <ul class="nav-links">
             <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
             <li><a href="#research">Research</a></li>
             <li><a href="#publications">Publications</a></li>
             <li><a href="#teaching">Teaching</a></li>
@@ -739,7 +216,7 @@
 <!-- Hero -->
 <header class="hero" id="about">
     <div class="hero-photo">
-        <img src="images/profile.png" alt="Dr. Alka Jain — Associate Professor of Economics" onerror="this.style.background='#EDE8DF';this.alt='Photo'">
+        <img src="images/profile.png" alt="Dr. Alka Jain" onerror="this.style.background='#EDE8DF';this.alt='Photo'">
     </div>
     <div class="hero-info">
         <h1>Dr. Alka Jain</h1>
@@ -762,23 +239,54 @@
                 Indore, Madhya Pradesh
             </div>
             <div class="meta-item">
-                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
-                Ph.D. in Economics (2016)
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+                32+ Years of Experience (Since 1994)
             </div>
         </div>
     </div>
 </header>
 
-<!-- About / Bio -->
+<!-- About -->
 <section class="section" id="bio">
     <span class="section-label">// Biography</span>
     <h2 class="section-title">About</h2>
     <p class="section-intro">
-        Dr. Alka Jain is an Associate Professor of Economics at the prestigious Shri Atal Bihari Vajpayee Government Arts &amp; Commerce College (Prime Minister's College of Excellence), Indore, one of the leading government institutions in Madhya Pradesh. With over three decades of dedicated teaching and research experience since 1994, she has established herself as a prolific scholar in Economics with over <strong>100 research publications</strong> spanning macroeconomics, Indian foreign trade policy, value-based education, tribal development, skill development, and the Indian knowledge tradition (Bhartiya Gyan Parampara).
+        Dr. Alka Jain is a distinguished Associate Professor of Economics at the prestigious Prime Minister College of Excellence (PMCoE), Shri Atal Bihari Vajpayee Government Arts &amp; Commerce College, Indore — one of the premier government educational institutions in Madhya Pradesh. With over <strong>32 years of dedicated teaching and research experience</strong> since beginning her academic career on 7 July 1994 in the Department of Higher Education, Madhya Pradesh, she has made outstanding contributions to the field of Economics through research, pedagogy, and institutional service.
     </p>
     <p class="section-intro">
-        She earned her Ph.D. in Economics in 2016 and was promoted to Associate Professor through the UGC Career Advancement Scheme in 2015. She actively contributes to the academic community through conference participation, seminar organization, research paper presentations, and institutional governance. Her work bridges contemporary economic challenges with India's cultural and philosophical heritage, reflecting a deep commitment to holistic education and national development.
+        Dr. Jain is a prolific scholar with more than <strong>100 research publications</strong> to her credit, spanning peer-reviewed journals, UGC-listed journals, edited book volumes, national and international conference proceedings, and seminar presentations. Her research covers a wide spectrum — from macroeconomic policy and India's foreign trade to tribal development, MSME sector analysis, skill development, value-based education, and the enduring legacy of India's knowledge tradition (Bhartiya Gyan Parampara).
     </p>
+    <p class="section-intro">
+        She earned her M.Phil. from Vikram University, Ujjain (1991) and her Ph.D. in Economics from Devi Ahilya Vishwavidyalaya (DAVV), Indore in 2016. She was promoted to Associate Professor through the UGC Career Advancement Scheme (CAS) in August 2015 and is a recognized Research Supervisor under DAVV. She has completed orientation and refresher courses at DAVV (Indore) and JNU (New Delhi). Throughout her career, she has been actively engaged in conference organization, paper presentation, question paper setting, institutional governance, and extension activities that strengthen the academic ecosystem.
+    </p>
+</section>
+
+<!-- Education -->
+<section class="section" id="education">
+    <span class="section-label">// Education</span>
+    <h2 class="section-title">Education &amp; Qualifications</h2>
+    <table class="edu-table">
+        <thead><tr><th>Degree</th><th>Subject / Details</th><th>University / Institution</th><th>Year</th></tr></thead>
+        <tbody>
+            <tr><td class="degree-name">Ph.D.</td><td>Economics</td><td>Devi Ahilya Vishwavidyalaya (DAVV), Indore</td><td>2016</td></tr>
+            <tr><td class="degree-name">Ph.D. Coursework</td><td>Economics — 71.94%</td><td>Devi Ahilya Vishwavidyalaya (DAVV), Indore</td><td>2013</td></tr>
+            <tr><td class="degree-name">M.Phil.</td><td>Economics — 76.6%, First Division</td><td>Vikram University, Ujjain</td><td>1991</td></tr>
+            <tr><td class="degree-name">M.A.</td><td>Economics — 60.6%, First Division</td><td>Vikram University, Ujjain</td><td>1986</td></tr>
+            <tr><td class="degree-name">B.A.</td><td>Economics — 59.8%, Second Division</td><td>Vikram University, Ujjain</td><td>1984</td></tr>
+            <tr><td class="degree-name">Higher Secondary</td><td>67.5%, First Division</td><td>M.P. Board, Bhopal</td><td>1981</td></tr>
+        </tbody>
+    </table>
+
+    <h3 class="sub-heading">Orientation &amp; Refresher Courses</h3>
+    <table class="edu-table">
+        <thead><tr><th>Course</th><th>Duration</th><th>University</th></tr></thead>
+        <tbody>
+            <tr><td class="degree-name">Orientation Course</td><td>16 Dec 1998 – 12 Jan 1999</td><td>DAVV, Indore</td></tr>
+            <tr><td class="degree-name">Refresher Course</td><td>17 May 2000 – 06 Jun 2000</td><td>DAVV, Indore</td></tr>
+            <tr><td class="degree-name">Refresher Course</td><td>11 Aug 2003 – 05 Sep 2003</td><td>Jawaharlal Nehru University (JNU), New Delhi</td></tr>
+            <tr><td class="degree-name">Refresher Course</td><td>09 Sep 2004 – 29 Sep 2004</td><td>DAVV, Indore</td></tr>
+        </tbody>
+    </table>
 </section>
 
 <!-- Research Areas -->
@@ -786,138 +294,438 @@
     <span class="section-label">// Research</span>
     <h2 class="section-title">Research Expertise</h2>
     <div class="research-grid">
-        <div class="research-card">
-            <h3>Indian Foreign Trade &amp; Policy</h3>
-            <p>Analysis of India's evolving trade landscape post-liberalization — export promotion strategies, exchange rate dynamics, trade barriers, and India's positioning in global markets.</p>
-        </div>
-        <div class="research-card">
-            <h3>Macroeconomics &amp; Development</h3>
-            <p>Study of economic growth patterns, FDI inflows, employment generation, labour migration, and inclusive development strategies with focus on Madhya Pradesh and tribal regions.</p>
-        </div>
-        <div class="research-card">
-            <h3>MSME Sector &amp; Skill Development</h3>
-            <p>Research on micro, small and medium enterprises in the era of globalization, skill formation, vocational education, and entrepreneurial development in India.</p>
-        </div>
-        <div class="research-card">
-            <h3>Value-Based Education</h3>
-            <p>Exploration of communication approaches in Indian value-based education, integrating traditional methods (storytelling, moral instruction) with modern digital pedagogy for holistic student development.</p>
-        </div>
-        <div class="research-card">
-            <h3>Bhartiya Gyan Parampara</h3>
-            <p>Study of India's ancient knowledge tradition — Vedic philosophy, Ayurveda, Yoga, and their relevance to the National Education Policy 2020 and contemporary academic frameworks.</p>
-        </div>
-        <div class="research-card">
-            <h3>Tribal &amp; Rural Economics</h3>
-            <p>Investigation of tribal health and healthcare initiatives, agricultural development in tribal districts, poverty dynamics, and sustainable economic growth in Madhya Pradesh.</p>
-        </div>
+        <div class="research-card"><h3>Indian Foreign Trade &amp; Policy</h3><p>India's evolving trade landscape post-1991 liberalization — export promotion, exchange rate volatility, rupee dynamics, trade barriers, and India's positioning in the global economy.</p></div>
+        <div class="research-card"><h3>Macroeconomics &amp; Development</h3><p>Growth patterns, FDI inflows, human development index, labour migration, gender analysis of employment trends, and inclusive economic development strategies.</p></div>
+        <div class="research-card"><h3>MSME Sector &amp; Entrepreneurship</h3><p>Micro, Small and Medium Enterprises in the globalization era — performance, employment generation, export prospects, and challenges facing Indian MSMEs.</p></div>
+        <div class="research-card"><h3>Skill Development &amp; HRD</h3><p>Skill formation, vocational education, human resource development, synergy between skill formation and entrepreneurial development, and NEP 2020 implementation.</p></div>
+        <div class="research-card"><h3>Value-Based Education</h3><p>Communication approaches for holistic student development — integrating traditional Indian values with modern digital pedagogy in the Indian education system.</p></div>
+        <div class="research-card"><h3>Bhartiya Gyan Parampara</h3><p>India's ancient knowledge tradition — Vedanta, Ayurveda, Yoga, Sankhya philosophy — and their relevance to contemporary education and the National Education Policy 2020.</p></div>
+        <div class="research-card"><h3>Tribal &amp; Rural Economics</h3><p>Tribal health and healthcare, agricultural development in tribal districts, poverty dynamics, and sustainable growth in underserved regions of Madhya Pradesh.</p></div>
+        <div class="research-card"><h3>Infrastructure &amp; Regional Economics</h3><p>Infrastructure-growth nexus, inter-district educational disparities, sustainable growth in Madhya Pradesh, and tourism economics.</p></div>
+        <div class="research-card"><h3>COVID-19 &amp; Economic Crisis</h3><p>Impact of COVID-19 pandemic on global and Indian economy — GDP contraction, employment loss, supply chain disruptions, sectoral analysis, and policy responses for economic recovery.</p></div>
     </div>
 </section>
 
 <!-- Publications -->
 <section class="section" id="publications">
     <span class="section-label">// Publications</span>
-    <h2 class="section-title">Selected Publications</h2>
+    <h2 class="section-title">Research Publications</h2>
 
     <div class="stats-bar">
-        <div class="stat-item">
-            <div class="stat-number">100+</div>
-            <div class="stat-label">Research Papers</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number">4</div>
-            <div class="stat-label">Papers in 2024–25</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number">45</div>
-            <div class="stat-label">A/R Score (2024–25)</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number">32</div>
-            <div class="stat-label">Years of Experience</div>
-        </div>
+        <div class="stat-item"><div class="stat-number">100+</div><div class="stat-label">Research Papers</div></div>
+        <div class="stat-item"><div class="stat-number">32+</div><div class="stat-label">Seminars &amp; Conferences</div></div>
+        <div class="stat-item"><div class="stat-number">45</div><div class="stat-label">A/R Score (2024–25)</div></div>
+        <div class="stat-item"><div class="stat-number">32+</div><div class="stat-label">Years in Academia</div></div>
     </div>
 
-    <p class="section-intro" style="margin-bottom:1.5rem;">
-        Dr. Jain has authored over 100 research papers published in peer-reviewed journals, UGC-listed journals, edited book volumes, and conference proceedings. Below is a selection of recent publications from the academic year 2024–25.
-    </p>
+    <p class="section-intro">Dr. Jain has authored over 100 research papers published in peer-reviewed journals, UGC-listed journals, edited books, and conference proceedings. She is the sole or main author of all her listed publications.</p>
 
-    <ul class="pub-list">
-        <li class="pub-item">
-            <span class="pub-year">AUG 2024</span>
-            <div class="pub-title">भारतीय विदेशी व्यापार की वर्तमान स्थिति: चुनौतियाँ एवं संभावनाएँ</div>
-            <div class="pub-title" style="font-size:0.95rem;font-weight:400;color:var(--clr-text-muted);margin-top:0.15rem;">(Current Status of India's Foreign Trade: Challenges and Prospects)</div>
-            <div class="pub-journal">Journal of Madhya Pradesh Economic Association (MPEA)</div>
-            <div class="pub-details">ISSN: 2277-1123 &nbsp;|&nbsp; Vol. XXXIII, No. 1 &nbsp;|&nbsp; Pages 215–229 &nbsp;|&nbsp; Sole Author</div>
-            <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
-            <span class="pub-tag tag-ugc">UGC Listed</span>
-        </li>
+    <!-- 2024-2025 -->
+    <div class="pub-year-group">
+        <div class="pub-year-heading">2024 – 2025</div>
+        <ul class="pub-list">
+            <li class="pub-item">
+                <span class="pub-num">#1</span>
+                <div class="pub-title">भारतीय विदेशी व्यापार की वर्तमान स्थिति: चुनौतियाँ एवं संभावनाएँ</div>
+                <div class="pub-title-en">(Current Status of India's Foreign Trade: Challenges and Prospects)</div>
+                <div class="pub-journal">Journal of Madhya Pradesh Economic Association (MPEA)</div>
+                <div class="pub-details">ISSN: 2277-1123 &nbsp;|&nbsp; Vol. XXXIII, No. 1, Aug 2024 &nbsp;|&nbsp; Pages 215–229 &nbsp;|&nbsp; Sole Author &nbsp;|&nbsp; A/R Score: 10</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span><span class="pub-tag tag-ugc">UGC Listed</span>
+            </li>
+            <li class="pub-item">
+                <span class="pub-num">#2</span>
+                <div class="pub-title">Value-Based Education and Communication Approaches in the Indian Context</div>
+                <div class="pub-journal">Swadeshi Research Foundation — A Monthly Journal of Multidisciplinary Research (SRF)</div>
+                <div class="pub-details">ISSN: 2394-3580 &nbsp;|&nbsp; Vol. 11, No. 10, Aug 2024 &nbsp;|&nbsp; Impact Factor: 5.2 &nbsp;|&nbsp; Pages 10–13 &nbsp;|&nbsp; Sole Author &nbsp;|&nbsp; A/R Score: 25</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span><span class="pub-tag tag-ugc">Ex-UGC S.N. 4990</span>
+            </li>
+            <li class="pub-item">
+                <span class="pub-num">#3</span>
+                <div class="pub-title">भारतीय ज्ञान परम्परा एवं राष्ट्रीय शिक्षा नीति</div>
+                <div class="pub-title-en">(Indian Knowledge Tradition and National Education Policy)</div>
+                <div class="pub-journal">Edited Book: भारतीय ज्ञान परंपरा के विविध संदर्भ — Govt. Girls PG College, Ratlam (M.P.)</div>
+                <div class="pub-details">ISBN: 978-93-93690-23-4 &nbsp;|&nbsp; May 2024 &nbsp;|&nbsp; Pages 48–51 &nbsp;|&nbsp; Sole Author &nbsp;|&nbsp; A/R Score: 05</div>
+                <span class="pub-tag tag-book">Book Chapter</span>
+            </li>
+            <li class="pub-item">
+                <span class="pub-num">#4</span>
+                <div class="pub-title">भारतीय ज्ञान परंपरा की वर्तमान सन्दर्भों में प्रासंगिकता</div>
+                <div class="pub-title-en">(Relevance of Indian Knowledge Tradition in Contemporary Contexts)</div>
+                <div class="pub-journal">GACC Journal — Shri Atal Bihari Vajpayee Govt. Arts &amp; Commerce College, Indore</div>
+                <div class="pub-details">E-ISSN: 2454-2717 &nbsp;|&nbsp; Vol. 1, Special Issue, 29 May 2024 &nbsp;|&nbsp; Pages 76–83 &nbsp;|&nbsp; Sole Author &nbsp;|&nbsp; A/R Score: 05</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+        </ul>
+    </div>
 
-        <li class="pub-item">
-            <span class="pub-year">AUG 2024</span>
-            <div class="pub-title">Value-Based Education and Communication Approaches in the Indian Context</div>
-            <div class="pub-journal">Swadeshi Research Foundation — A Monthly Journal of Multidisciplinary Research</div>
-            <div class="pub-details">ISSN: 2394-3580 &nbsp;|&nbsp; Vol. 11, No. 10 &nbsp;|&nbsp; Impact Factor: 5.2 &nbsp;|&nbsp; Pages 10–13 &nbsp;|&nbsp; Sole Author</div>
-            <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
-            <span class="pub-tag tag-ugc">Ex-UGC S.N. 4990</span>
-        </li>
+    <!-- 2017-2023 Papers -->
+    <div class="pub-year-group">
+        <div class="pub-year-heading">2017 – 2023</div>
+        <ul class="pub-list">
+            <li class="pub-item">
+                <span class="pub-num">#5</span>
+                <div class="pub-title">कोविड-19 का वैश्विक परिश्य में भारतीय अर्थव्यवस्था पर प्रभाव — चुनौतियाँ एवं संभावनाएँ</div>
+                <div class="pub-title-en">(Impact of COVID-19 on Indian Economy in the Global Perspective — Challenges and Prospects)</div>
+                <div class="pub-journal">International Journal of Innovation in Engineering Research &amp; Management (IJIERM)</div>
+                <div class="pub-details">ISSN: 2348-4918 &nbsp;|&nbsp; Vol. 10, Special Issue 01 (IC-IESP-MULTI-2023), Jan 2023 &nbsp;|&nbsp; Pages 460–466 &nbsp;|&nbsp; Sole Author</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <span class="pub-num">#6</span>
+                <div class="pub-title">भारतीय अर्थव्यवस्था संकट में: कोविड-19 का प्रभाव एवं चुनौतियाँ</div>
+                <div class="pub-title-en">(Indian Economy in Crisis: Impact and Challenges of COVID-19)</div>
+                <div class="pub-journal">Scholarly Research Journal for Interdisciplinary Studies (SRJIS)</div>
+                <div class="pub-details">Online ISSN: 2278-8808 &nbsp;|&nbsp; SJIF 2019 = 6.380 &nbsp;|&nbsp; Nov–Dec 2020, Vol. 8/62 &nbsp;|&nbsp; Pages 14482–14489 &nbsp;|&nbsp; Sole Author</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <span class="pub-num">#7</span>
+                <div class="pub-title">मनरेगा योजना का रोजगार सृजन एवं आय संवर्धन पर प्रभाव (इन्दौर जिले के संदर्भ में)</div>
+                <div class="pub-title-en">(Impact of MGNREGA on Employment Generation and Income Enhancement — With Reference to Indore District)</div>
+                <div class="pub-journal">KAAV International Journal of Economics, Commerce &amp; Business Management</div>
+                <div class="pub-details">ISSN: 2348-4969 &nbsp;|&nbsp; Impact Factor: 7.8902 (2017) &nbsp;|&nbsp; UGC Approved Journal No. 47663 &nbsp;|&nbsp; Vol. 4, Issue 4 (SIECM87), Oct–Dec 2017 &nbsp;|&nbsp; Pages 406–413 &nbsp;|&nbsp; Sole Author</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span><span class="pub-tag tag-ugc">UGC Approved</span>
+            </li>
+            <li class="pub-item">
+                <span class="pub-num">#8</span>
+                <div class="pub-title">मनरेगा योजना का रोजगार सृजन एवं आय संवर्धन पर प्रभाव (इन्दौर जिले के संदर्भ में)</div>
+                <div class="pub-title-en">(MGNREGA: Employment Generation and Income Enhancement — Indore District) — Book Chapter</div>
+                <div class="pub-journal">Edited Book: 6th International Conference, Vishisht School of Management, Indore — "Paradigm Shift in Global Business Practices and Socio Economic Development"</div>
+                <div class="pub-details">Published by KAAV Publications &nbsp;|&nbsp; Dec 2017 &nbsp;|&nbsp; Chapter 87, Pages 406–413 &nbsp;|&nbsp; Sole Author</div>
+                <span class="pub-tag tag-book">Book Chapter</span>
+            </li>
+        </ul>
+    </div>
 
-        <li class="pub-item">
-            <span class="pub-year">MAY 2024</span>
-            <div class="pub-title">भारतीय ज्ञान परम्परा एवं राष्ट्रीय शिक्षा नीति</div>
-            <div class="pub-title" style="font-size:0.95rem;font-weight:400;color:var(--clr-text-muted);margin-top:0.15rem;">(Indian Knowledge Tradition and National Education Policy)</div>
-            <div class="pub-journal">Edited Book: भारतीय ज्ञान परंपरा के विविध संदर्भ (Diverse Contexts of Indian Knowledge Tradition)</div>
-            <div class="pub-details">ISBN: 978-93-93690-23-4 &nbsp;|&nbsp; Pages 48–51 &nbsp;|&nbsp; Sole Author</div>
-            <span class="pub-tag tag-book">Book Chapter</span>
-        </li>
+    <!-- Selected Earlier Papers -->
+    <div class="pub-year-group">
+        <div class="pub-year-heading">Selected Papers — Earlier Years</div>
+        <p style="font-size:0.92rem;color:var(--clr-text-muted);margin-bottom:1rem;line-height:1.7;">Representative selection from Dr. Jain's broader body of 100+ publications, organized thematically.</p>
 
-        <li class="pub-item">
-            <span class="pub-year">MAY 2024</span>
-            <div class="pub-title">भारतीय ज्ञान परंपरा की वर्तमान सन्दर्भों में प्रासंगिकता</div>
-            <div class="pub-title" style="font-size:0.95rem;font-weight:400;color:var(--clr-text-muted);margin-top:0.15rem;">(Relevance of Indian Knowledge Tradition in Contemporary Contexts)</div>
-            <div class="pub-journal">GACC Journal — A Quarterly Journal, Shri Atal Bihari Vajpayee Govt. Arts &amp; Commerce College, Indore</div>
-            <div class="pub-details">E-ISSN: 2454-2717 &nbsp;|&nbsp; Vol. 1, Special Issue &nbsp;|&nbsp; Pages 76–83 &nbsp;|&nbsp; Sole Author</div>
-            <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
-        </li>
-    </ul>
+        <h3 class="sub-heading">Indian Foreign Trade &amp; Macroeconomics</h3>
+        <ul class="pub-list">
+            <li class="pub-item">
+                <div class="pub-title">Effect of Rupee's Exchange Rate Volatility on Indian Exports: A Panel Data Study</div>
+                <div class="pub-journal">Journal of Madhya Pradesh Economic Association (MPEA)</div>
+                <div class="pub-details">ISSN: 2277-1123 &nbsp;|&nbsp; Peer Reviewed &nbsp;|&nbsp; Sole Author</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">Interlinking Foreign Direct Investment Inflows and Human Development Index</div>
+                <div class="pub-journal">National / International Peer-Reviewed Journal</div>
+                <div class="pub-details">FDI-HDI correlation and cross-country growth analysis &nbsp;|&nbsp; Sole Author</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">Unveiling the Correlation Between Foreign Direct Investment and Cross-Country Growth</div>
+                <div class="pub-journal">Peer-Reviewed Economics Journal</div>
+                <div class="pub-details">Empirical study on FDI patterns and developmental impact</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">Will India Benefit from China's Waning Economic Influence?</div>
+                <div class="pub-journal">National Economics Journal</div>
+                <div class="pub-details">Analysis of geopolitical economic shifts and India's opportunity</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">भारतीय विदेशी व्यापार की वर्तमान स्थिति: चुनौतियाँ एवं संभावनाएँ</div>
+                <div class="pub-title-en">(India's Foreign Trade: Current Challenges and Future Opportunities — Earlier Study)</div>
+                <div class="pub-journal">Published in National Economics Journal</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+        </ul>
 
-    <p style="font-size:0.88rem;color:var(--clr-text-muted);margin-top:1.5rem;font-style:italic;">
-        * The above list represents recent publications from 2024–25 only. Dr. Jain's full publication record includes 100+ papers across leading economics journals, national seminars, and edited volumes spanning topics in trade policy, development economics, education, and Indian knowledge systems.
-    </p>
+        <h3 class="sub-heading">MSME, Skill Development &amp; Employment</h3>
+        <ul class="pub-list">
+            <li class="pub-item">
+                <div class="pub-title">Synergy of Skill Formation and Entrepreneurial Development: The Imperative for India's Pathway to an Economic Powerhouse by 2047</div>
+                <div class="pub-journal">Journal of Madhya Pradesh Economic Association (MPEA)</div>
+                <div class="pub-details">ISSN: 2277-1123 &nbsp;|&nbsp; Peer Reviewed</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">Performance of Micro, Small and Medium Enterprises in India</div>
+                <div class="pub-journal">Peer-Reviewed Journal</div>
+                <div class="pub-details">MSME sector analysis — performance metrics, growth trajectory, and policy impact</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">Micro–Small and Medium Industries in the Era of Globalization and its Impact on Export Prospects</div>
+                <div class="pub-journal">National Economics Journal</div>
+                <div class="pub-details">Globalization impact on Indian MSMEs and export competitiveness</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">Employment Generation in MSME Sector in India</div>
+                <div class="pub-journal">Peer-Reviewed Journal</div>
+                <div class="pub-details">Job creation potential and employment dynamics in the MSME sector</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">Skill Development in Madhya Pradesh: Challenges and Opportunities</div>
+                <div class="pub-journal">Journal of Madhya Pradesh Economic Association</div>
+                <div class="pub-details">ISSN: 2277-1123 &nbsp;|&nbsp; State-level skill ecosystem assessment</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">Human Resource Development in Madhya Pradesh Through Vocational Education</div>
+                <div class="pub-journal">National Economics Journal</div>
+                <div class="pub-details">Vocational education's role in HRD</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">Gender Analysis of Employment Trends and Economic Dynamics in Madhya Pradesh: Pursuing Inclusive Growth (2017–2023)</div>
+                <div class="pub-journal">Peer-Reviewed Journal</div>
+                <div class="pub-details">Longitudinal gender-disaggregated employment study in M.P.</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+        </ul>
+
+        <h3 class="sub-heading">Tribal Development, Regional &amp; Rural Economics</h3>
+        <ul class="pub-list">
+            <li class="pub-item">
+                <div class="pub-title">Major Issues and Challenges of Tribal Health and Healthcare Initiatives: An Analytical Study of Amarkantak</div>
+                <div class="pub-journal">Journal of Madhya Pradesh Economic Association</div>
+                <div class="pub-details">ISSN: 2277-1123 &nbsp;|&nbsp; Peer Reviewed</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">Agricultural Development in Tribal Districts of Madhya Pradesh</div>
+                <div class="pub-journal">National Economics Journal</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">The Economic Impact of Labor Out-Migration in Datia District of Madhya Pradesh</div>
+                <div class="pub-journal">Peer-Reviewed Journal</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">मध्यप्रदेश में जनजाति समुदाय में गरीबी की स्थिति तथा उसका स्वरूप</div>
+                <div class="pub-title-en">(Status and Nature of Poverty in Tribal Communities of Madhya Pradesh)</div>
+                <div class="pub-journal">National Economics Journal</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">Equitable and Sustainable Economic Growth in Madhya Pradesh</div>
+                <div class="pub-journal">Journal of Madhya Pradesh Economic Association</div>
+                <div class="pub-details">ISSN: 2277-1123</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">How Infrastructure Availability and Accessibility Fuel Economic Development in Madhya Pradesh</div>
+                <div class="pub-journal">National Economics Journal</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">An Analysis of Inter-District Variations in Educational Status of Madhya Pradesh for Effective Implementation of NEP 2020</div>
+                <div class="pub-journal">Peer-Reviewed Journal</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">जनजातीय विकास में प्राकृतिक संसाधनों के दोहन में शासकीय नीतियों का अध्ययन (बालाघाट जिले के विशेष संदर्भ में)</div>
+                <div class="pub-title-en">(Government Policies on Natural Resource Exploitation for Tribal Development — Balaghat District)</div>
+                <div class="pub-journal">Journal of Madhya Pradesh Economic Association</div>
+                <div class="pub-details">ISSN: 2277-1123</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+        </ul>
+
+        <h3 class="sub-heading">Education, Indian Knowledge Systems &amp; Social Economics</h3>
+        <ul class="pub-list">
+            <li class="pub-item">
+                <div class="pub-title">भारतीय ज्ञान परंपरा और राष्ट्रीय शिक्षा नीति</div>
+                <div class="pub-title-en">(Indian Knowledge Tradition and National Education Policy)</div>
+                <div class="pub-journal">Edited Book — भारतीय ज्ञान परंपरा के विविध संदर्भ</div>
+                <div class="pub-details">ISBN: 978-93-93690-23-4</div>
+                <span class="pub-tag tag-book">Book Chapter</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">भारतीय ज्ञान परंपरा की वर्तमान सन्दर्भों में प्रासंगिकता</div>
+                <div class="pub-title-en">(Relevance of Indian Knowledge Tradition in Contemporary Contexts)</div>
+                <div class="pub-journal">GACC Journal, E-ISSN: 2454-2717</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">Value-Based Education and Communication Approaches in the Indian Context</div>
+                <div class="pub-journal">Swadeshi Research Foundation Journal &nbsp;|&nbsp; ISSN: 2394-3580 &nbsp;|&nbsp; IF: 5.2</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">Right to Education: A Study (in the Reference of Indore City)</div>
+                <div class="pub-journal">Research Journal of Social and Life Sciences, Centre for Research Studies, Rewa (M.P.)</div>
+                <div class="pub-details">Vol. XIII, Year 07, Dec 2012 &nbsp;|&nbsp; Pages 127–132 &nbsp;|&nbsp; USA Title Id: 715205</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">A Study of HRD Culture on Effectiveness of Faculty Performance</div>
+                <div class="pub-journal">Globalization of Higher Education in India: Challenges &amp; Prospects — Sponsored by NAAC</div>
+                <div class="pub-details">ISBN: 978-93-83083-04-6 &nbsp;|&nbsp; Apr 2013 &nbsp;|&nbsp; Pages 103–105</div>
+                <span class="pub-tag tag-book">Conference Proceedings</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">Basic Values Embodied in Indian Culture and Their Relevance to National Reconstruction</div>
+                <div class="pub-journal">Seminar, Dept. of Philosophy, Mata Jija Bai Govt. P.G. Girls College, Indore</div>
+                <div class="pub-details">January 2013</div>
+                <span class="pub-tag tag-peer-reviewed">Seminar Paper</span>
+            </li>
+        </ul>
+
+        <h3 class="sub-heading">Published Papers (2011–2013)</h3>
+        <ul class="pub-list">
+            <li class="pub-item">
+                <div class="pub-title">सूचना प्रौद्योगिकी: भारत का बदलता आर्थिक परिदृश्य एवं चुनौतियाँ</div>
+                <div class="pub-title-en">(Information Technology: India's Changing Economic Landscape and Challenges)</div>
+                <div class="pub-journal">सृजन विमर्श, संस्कृति भाषा एवं साहित्य की अर्धवार्षिक शोध पत्रिका — SABV GACC, Indore</div>
+                <div class="pub-details">ISSN: 81-901804-5-2 &nbsp;|&nbsp; 2012–13 &nbsp;|&nbsp; Pages 121–127</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">वैश्विक परिदृश्य में भारतीय अर्थव्यवस्था की चुनौतियाँ</div>
+                <div class="pub-title-en">(Challenges of the Indian Economy in the Global Perspective)</div>
+                <div class="pub-journal">मध्यभारती शोध पत्रिका — Dr. Harishingh Gour Vishwavidyalaya, Sagar (M.P.)</div>
+                <div class="pub-details">ISSN: 0974-0066 &nbsp;|&nbsp; 2013 &nbsp;|&nbsp; Vol. LXV &nbsp;|&nbsp; Pages 55–66</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">भारत के विदेशी व्यापार की वर्तमान रणनीति एवं सुधारों की प्रासंगिकता</div>
+                <div class="pub-title-en">(Current Strategy of India's Foreign Trade and Relevance of Reforms)</div>
+                <div class="pub-journal">सृजन विमर्श, संभाषा की शोध पत्रिका</div>
+                <div class="pub-details">ISSN: 81-901804-5-2 &nbsp;|&nbsp; March 2013 &nbsp;|&nbsp; Vol. 1 &nbsp;|&nbsp; Pages 31–35</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">Economic Development and Changing Dimension of Food, Clothing and Shelter</div>
+                <div class="pub-journal">The International Research Journal of Social Sciences and Humanities, Indore</div>
+                <div class="pub-details">ISSN: 2320-4702 &nbsp;|&nbsp; Vol. 01, No. 01, April 2012 &nbsp;|&nbsp; Pages 33–43</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">गाँव में रोजगार का सुलभ साधन — मनरेगा</div>
+                <div class="pub-title-en">(MGNREGA: Accessible Employment in Villages)</div>
+                <div class="pub-journal">Kurukshetra — Grameen Vikas Mantralaya, Govt. of India</div>
+                <div class="pub-details">ISSN: 0971-8451 &nbsp;|&nbsp; Bharat Varsh 59, Anka 04, Feb 2013 &nbsp;|&nbsp; Pages 12–16</div>
+                <span class="pub-tag tag-ugc">Govt. of India Publication</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">मध्यप्रदेश अर्थव्यवस्था के ऊर्जा क्षेत्र में सार्वजनिक एवं निजी क्षेत्र की सहभागिता</div>
+                <div class="pub-title-en">(Public and Private Sector Participation in M.P.'s Energy Sector)</div>
+                <div class="pub-journal">Journal of Madhya Pradesh Economic Association (MPEA)</div>
+                <div class="pub-details">ISSN: 2277-1123 &nbsp;|&nbsp; Regd. No. 20588/85 &nbsp;|&nbsp; Vol. XXII, Feb 2011, No. 1 &nbsp;|&nbsp; Pages 125–135</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span><span class="pub-tag tag-ugc">UGC Listed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">Information Technology and India in the Time of Globalization</div>
+                <div class="pub-journal">Journal of Science, Technology and Society — Dept. of Sociology, Indore Christian College</div>
+                <div class="pub-details">ISBN: 978-81-8465-760-9 &nbsp;|&nbsp; March 2011 &nbsp;|&nbsp; Pages 11–13</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">मध्यप्रदेश में वित्तीय समावेशन में लघु वित्त की भूमिका</div>
+                <div class="pub-title-en">(Role of Microfinance in Financial Inclusion in Madhya Pradesh)</div>
+                <div class="pub-journal">Journal of Madhya Pradesh Economic Association (MPEA)</div>
+                <div class="pub-details">ISSN: 2277-1123 &nbsp;|&nbsp; Vol. XXIII, Feb 2012, No. 1 &nbsp;|&nbsp; Pages 203–209</div>
+                <span class="pub-tag tag-peer-reviewed">Peer Reviewed</span><span class="pub-tag tag-ugc">UGC Listed</span>
+            </li>
+        </ul>
+
+        <h3 class="sub-heading">Conference &amp; Seminar Papers Presented (1993–2013)</h3>
+        <ul class="pub-list">
+            <li class="pub-item">
+                <div class="pub-title">Bhartiya Arthvyavastha ka Vaishvik Paridrashya: Vartman Pravrattiya avam Chunoutiya</div>
+                <div class="pub-title-en">(Global Perspective of Indian Economy: Current Trends and Challenges)</div>
+                <div class="pub-journal">National Seminar, SABV Govt. Arts &amp; Commerce College, Indore</div>
+                <div class="pub-details">16–18 February 2013</div>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">Samaveshi Vikas avam Garibi Unmulan tatha Rojgar Srajan Karykram: MANREGA</div>
+                <div class="pub-journal">National Seminar, School of Economics, DAVV, Indore</div>
+                <div class="pub-details">22–23 February 2013</div>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">Arthik Vikas avam Roti, Kapda aur Makaan ke Badalte Aayam</div>
+                <div class="pub-journal">International Conference, The Global Association of Social Sciences (GASS), Indore</div>
+                <div class="pub-details">22–23 February 2013</div>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">हास्य योग का मानवीय स्वास्थ्य पर प्रभाव</div>
+                <div class="pub-title-en">(Impact of Laughter Yoga on Human Health)</div>
+                <div class="pub-journal">राष्ट्रीय शोध संगोष्ठी — SABV GACC, Indore</div>
+                <div class="pub-details">28–29 April 2013</div>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">मध्यप्रदेश में वित्तीय समावेशन में लघुवित्त की भूमिका</div>
+                <div class="pub-title-en">(Role of Microfinance in Financial Inclusion in M.P.)</div>
+                <div class="pub-journal">23rd MPEA Annual Conference — Awdhesh Pratap Singh University, Rewa (M.P.)</div>
+                <div class="pub-details">17–18 February 2012</div>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">भारत में सूचना प्रौद्योगिकी निर्यात का बदलता परिदृश्य</div>
+                <div class="pub-title-en">(Changing Landscape of IT Exports in India)</div>
+                <div class="pub-journal">National Seminar, Mata Jija Bai Govt. Girls College, Indore</div>
+                <div class="pub-details">20–21 September 2008</div>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">उपभोक्ता समस्याएं जागरूकता एवं कानून का क्रियान्वयन</div>
+                <div class="pub-title-en">(Consumer Problems, Awareness and Law Implementation)</div>
+                <div class="pub-journal">राष्ट्रीय शोध सेमिनार — शासकीय कन्या महाविद्यालय, रतलाम (M.P.)</div>
+                <div class="pub-details">13–14 September 2008</div>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">भ्रूण हत्या एक चिंतनीय पहलू</div>
+                <div class="pub-title-en">(Feticide: A Matter of Concern)</div>
+                <div class="pub-journal">राष्ट्रीय सेमिनार — शा. स्नातकोत्तर कन्या महाविद्यालय, इन्दौर</div>
+                <div class="pub-details">17–18 February 2007</div>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">Role of Banks in Self Employment</div>
+                <div class="pub-journal">Seminar, School of Studies in Economics, Vikram University, Ujjain</div>
+                <div class="pub-details">02–04 January 1994</div>
+            </li>
+            <li class="pub-item">
+                <div class="pub-title">Problem of Unemployment with Reference to Ratlam District</div>
+                <div class="pub-journal">National Seminar, School of Studies in Mathematics, Vikram University, Ujjain</div>
+                <div class="pub-details">12–15 February 1993</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="note-box">
+        <strong>Note:</strong> The above is a representative selection. Dr. Jain's complete bibliography includes 100+ research papers published across the Journal of Madhya Pradesh Economic Association, KAAV International Journal of Economics Commerce &amp; Business Management (UGC Approved), Scholarly Research Journal for Interdisciplinary Studies (SRJIS), International Journal of Innovation in Engineering Research &amp; Management (IJIERM), Madhyabharti Shodh Patrika, Kurukshetra (Govt. of India), Swadeshi Research Foundation Journal, GACC Journal, Srijan Vimarsh, International Research Journal of Social Sciences &amp; Humanities, and numerous other peer-reviewed, UGC-listed, and national/international publications spanning over three decades (1993–2025) in Economics. She has presented research papers at 32+ national and international seminars and conferences.
+    </div>
 </section>
 
 <!-- Teaching -->
 <section class="section" id="teaching">
     <span class="section-label">// Teaching</span>
     <h2 class="section-title">Teaching &amp; Academic Engagement</h2>
-    <p class="section-intro">
-        Dr. Jain teaches Economics at both the undergraduate and postgraduate levels, maintaining an excellent teaching attendance record of approximately 83.63% across all assigned classes. Her courses span microeconomics, macroeconomics, Indian economy, and development economics.
-    </p>
+    <p class="section-intro">Dr. Jain teaches Economics at postgraduate and undergraduate levels. In 2024–25, she maintained ~83.63% teaching attendance — 470 out of 562 assigned classes.</p>
 
+    <h3 class="sub-heading" style="margin-top:0;">Teaching Load (2024–25)</h3>
+    <div class="pub-table-wrap">
+        <table class="pub-table">
+            <thead><tr><th>Programme</th><th>Mode</th><th>Assigned</th><th>Taught</th></tr></thead>
+            <tbody>
+                <tr><td class="paper-title">PG — M.A. I Semester</td><td>Lecture</td><td>91</td><td>75</td></tr>
+                <tr><td class="paper-title">PG — M.A. II Semester</td><td>Lecture</td><td>90</td><td>74</td></tr>
+                <tr><td class="paper-title">UG — B.A. I Year</td><td>Lecture</td><td>191</td><td>161</td></tr>
+                <tr><td class="paper-title">UG — B.A. III (Minor)</td><td>Lecture</td><td>95</td><td>80</td></tr>
+                <tr><td class="paper-title">UG — B.A. III (Elective)</td><td>Lecture</td><td>95</td><td>80</td></tr>
+                <tr><td class="paper-title" style="font-weight:700;color:var(--clr-accent);">Total</td><td></td><td style="font-weight:700;">562</td><td style="font-weight:700;">470 (83.63%)</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3 class="sub-heading">Courses &amp; Responsibilities</h3>
     <div class="teaching-grid">
-        <div class="teach-card">
-            <span class="level-badge">Postgraduate</span>
-            <h3>M.A. Economics</h3>
-            <p>Advanced coursework in economic theory, Indian economic policy, international trade, and quantitative methods. Lectures and seminar-based instruction for postgraduate scholars.</p>
-        </div>
-        <div class="teach-card">
-            <span class="level-badge">Undergraduate</span>
-            <h3>B.A. Economics (Major &amp; Minor)</h3>
-            <p>Foundational and intermediate courses in micro and macroeconomics, Indian economy, and development economics for undergraduate students across multiple sections.</p>
-        </div>
-        <div class="teach-card">
-            <span class="level-badge">Examination Duties</span>
-            <h3>Assessment &amp; Evaluation</h3>
-            <p>Responsibilities include university question paper setting, evaluation and grading of answer notebooks, and invigilation duties for college and university examinations.</p>
-        </div>
-        <div class="teach-card">
-            <span class="level-badge">Research Guidance</span>
-            <h3>UG Projects &amp; Mentorship</h3>
-            <p>Actively involved in guiding undergraduate research projects and mentoring students in academic writing, research methodology, and career development.</p>
-        </div>
+        <div class="teach-card"><span class="level-badge">Postgraduate</span><h3>M.A. Economics</h3><p>Public Finance (Economics), International Economics, Micro Economics, and Macro Economics.</p></div>
+        <div class="teach-card"><span class="level-badge">Undergraduate</span><h3>B.A. Economics</h3><p>Micro Economics, Macro Economics, Statistics, Economic Development &amp; Planning, Indian Economics, Entrepreneurship Development, and Environment.</p></div>
+        <div class="teach-card"><span class="level-badge">Examination</span><h3>Assessment &amp; Evaluation</h3><p>University question paper setting (PSC), evaluation of answer notebooks, and invigilation duty coordination.</p></div>
+        <div class="teach-card"><span class="level-badge">Mentorship</span><h3>Research Guidance</h3><p>Recognized Research Supervisor under DAVV. Guiding UG projects and mentoring students in research methodology.</p></div>
     </div>
 </section>
 
-<!-- Professional Activities -->
+<!-- Activities -->
 <section class="section" id="activities">
     <span class="section-label">// Activities</span>
     <h2 class="section-title">Conferences, Seminars &amp; Professional Activities</h2>
@@ -926,85 +734,91 @@
         <div class="activity-card">
             <span class="ac-date">17–22 FEB 2025</span>
             <h3>6-Day Workshop on Research Papers, Articles, Research Proposals &amp; Seminars</h3>
-            <p class="ac-org">PMCoE, Shri Atal Bihari Vajpayee Govt. Arts &amp; Commerce College, Indore (Under IQAC)</p>
+            <p class="ac-org">Dept. of Political Science, PMCoE, SABV GACC, Indore — Under IQAC</p>
             <p class="ac-role">Participant — Certified</p>
         </div>
-
         <div class="activity-card">
             <span class="ac-date">03 MAR 2025</span>
             <h3>National Seminar: "Various Dimensions of Tourism in Present Perspective"</h3>
-            <p class="ac-org">Dept. of History, PMCoE, Indore — Funded by Dept. of Higher Education</p>
-            <p class="ac-role">Paper Presenter / Participant</p>
+            <p class="ac-org">Dept. of History, PMCoE, Indore — Under IQAC &amp; Dept. of Higher Education</p>
+            <p class="ac-role">Paper Presenter</p>
         </div>
-
         <div class="activity-card">
             <span class="ac-date">30–31 AUG 2024</span>
-            <h3>XXXIII Annual Conference of MPEA — "Pathways to Sustainability: Building Sustainable India — Challenges &amp; Strategies"</h3>
-            <p class="ac-org">School of Economics, Devi Ahilya Vishwavidyalaya, Indore — Organized with UGC-SAP, CPEPA, STRIDE, RIS, PathS</p>
-            <p class="ac-role">Registered Delegate &amp; Participant</p>
+            <h3>XXXIII Annual Conference of MPEA — "Pathways to Sustainability"</h3>
+            <p class="ac-org">School of Economics, DAVV, Indore — With UGC-SAP, CPEPA, STRIDE, RIS, ICSSR</p>
+            <p class="ac-role">Registered Delegate</p>
         </div>
-
+        <div class="activity-card">
+            <span class="ac-date">28 AUG 2024</span>
+            <h3>शोध निर्देशक मान्यता — Research Supervisor Recognition</h3>
+            <p class="ac-org">DAVV Economics Research Committee — Recognized under revised UGC norms</p>
+            <p class="ac-role">Recognized Research Supervisor</p>
+        </div>
+        <div class="activity-card">
+            <span class="ac-date">12 AUG 2024</span>
+            <h3>National Webinar: "Objectives and Impact of Value Based Education"</h3>
+            <p class="ac-org">Government College, Khilchipur (M.P.) — Dept. of Higher Education, M.P.</p>
+            <p class="ac-role">Paper Presenter</p>
+        </div>
         <div class="activity-card">
             <span class="ac-date">29 MAY 2024</span>
-            <h3>National Webinar: "भारतीय ज्ञान परंपरा के विविध संदर्भ" (Diverse Contexts of Indian Knowledge Tradition)</h3>
-            <p class="ac-org">Shri Atal Bihari Vajpayee Govt. Arts &amp; Commerce College, Indore — Under IQAC &amp; Sanskrit Department, M.P. Government</p>
+            <h3>National Webinar: "भारतीय ज्ञान परंपरा के विविध संदर्भ"</h3>
+            <p class="ac-org">SABV GACC, Indore — IQAC &amp; Sanskrit Department, M.P. Govt.</p>
             <p class="ac-role">Research Paper Presenter</p>
         </div>
-
         <div class="activity-card">
             <span class="ac-date">28 MAY 2024</span>
             <h3>National Webinar: "Bhartiya Gyan Parampara ke Vividh Sandarbh"</h3>
-            <p class="ac-org">Dept. of Hindi, Govt. Girls PG College, Ratlam (M.P.) — In association with IQAC</p>
-            <p class="ac-role">Paper Presenter — शिक्षा नीति (Education Policy)</p>
+            <p class="ac-org">Dept. of Hindi, Govt. Girls PG College, Ratlam — With IQAC</p>
+            <p class="ac-role">Paper Presenter — शिक्षा नीति</p>
         </div>
-
         <div class="activity-card">
-            <span class="ac-date">12 AUG 2024</span>
-            <h3>One Day National Webinar: "Objectives and Impact of Value Based Education"</h3>
-            <p class="ac-org">Government College, Khilchipur (M.P.) — Sponsored by Dept. of Higher Education, Govt. of Madhya Pradesh</p>
-            <p class="ac-role">Paper Presenter / Participant</p>
+            <span class="ac-date">24 OCT 2024</span>
+            <h3>आत्मसरक्षा प्रशिक्षण शिविर — Self-Defense Training Camp</h3>
+            <p class="ac-org">PMCoE, SABV GACC, Indore</p>
+            <p class="ac-role">Coordinator</p>
         </div>
     </div>
 
-    <h3 style="font-family:var(--font-display);font-size:1.3rem;margin-top:2.5rem;margin-bottom:1.2rem;">Administrative &amp; Service Contributions</h3>
+    <h3 class="sub-heading">Administrative &amp; Service Contributions</h3>
     <div class="teaching-grid">
-        <div class="teach-card">
-            <span class="level-badge">Administration</span>
-            <h3>College Governance</h3>
-            <p>Active role in library committee, anti-ragging cell, women grievance cell, college event management, and institutional planning.</p>
-        </div>
-        <div class="teach-card">
-            <span class="level-badge">Extension</span>
-            <h3>Co-curricular &amp; Field Activities</h3>
-            <p>Involvement in plantation drives, student co-curricular programs, and self-defense training coordination for women students (Oct 2024).</p>
-        </div>
+        <div class="teach-card"><span class="level-badge">Governance</span><h3>Institutional Administration</h3><p>Library committee, anti-ragging committee, women grievance redressal cell, college pavilion management, railway concession committee, and event coordination.</p></div>
+        <div class="teach-card"><span class="level-badge">Extension</span><h3>Co-curricular Activities</h3><p>ATEM cultural/literary activities, plantation drives, student programs, and community engagement initiatives.</p></div>
+        <div class="teach-card"><span class="level-badge">Examination</span><h3>University Examination Duties</h3><p>Question paper setting for PSC and university exams, evaluation of notebooks, and invigilation coordination.</p></div>
+        <div class="teach-card"><span class="level-badge">Professional</span><h3>MPEA Life Member</h3><p>Life member of the Madhya Pradesh Economic Association. Active in UGC-sponsored programs and faculty development.</p></div>
     </div>
 </section>
 
-<!-- Career Timeline -->
+<!-- Career -->
 <section class="section" id="career">
     <span class="section-label">// Career</span>
     <h2 class="section-title">Academic Career</h2>
     <div class="timeline">
         <div class="timeline-item">
-            <div class="timeline-date">2015 — PRESENT</div>
+            <div class="timeline-date">AUG 2015 — PRESENT</div>
             <div class="timeline-title">Associate Professor of Economics</div>
-            <div class="timeline-desc">PMCoE, Shri Atal Bihari Vajpayee Govt. Arts &amp; Commerce College, Indore — Promoted via UGC Career Advancement Scheme (CAS)</div>
+            <div class="timeline-desc">PMCoE, Shri Atal Bihari Vajpayee Govt. Arts &amp; Commerce College, Indore — Promoted via UGC CAS, 27 Aug 2015</div>
         </div>
         <div class="timeline-item">
-            <div class="timeline-date">2016</div>
-            <div class="timeline-title">Ph.D. in Economics</div>
-            <div class="timeline-desc">Doctoral degree awarded on 30 January 2016 — Devi Ahilya Vishwavidyalaya, Indore</div>
+            <div class="timeline-date">JAN 2016</div>
+            <div class="timeline-title">Ph.D. in Economics Awarded</div>
+            <div class="timeline-desc">Devi Ahilya Vishwavidyalaya (DAVV), Indore — Awarded 30 January 2016</div>
         </div>
         <div class="timeline-item">
-            <div class="timeline-date">2006 — 2015</div>
+            <div class="timeline-date">JUL 2006 — AUG 2015</div>
             <div class="timeline-title">Assistant Professor of Economics (PSC Selected)</div>
-            <div class="timeline-desc">Joined Govt. Arts &amp; Commerce College, Indore on 20 July 2006 through Madhya Pradesh Public Service Commission selection</div>
+            <div class="timeline-desc">Joined PMCoE SABV GACC, Indore on 20 July 2006 through M.P. Public Service Commission (Merit No. 44). Senior Grade from 07.07.1999, Selection Grade from 07.07.2004, 4th Pay Band from 07.07.2007.</div>
         </div>
         <div class="timeline-item">
-            <div class="timeline-date">1994 — 2006</div>
-            <div class="timeline-title">Teaching Career Began</div>
-            <div class="timeline-desc">Started teaching career on 7 July 1994, building foundational experience in Economics education</div>
+            <div class="timeline-date">JUL 1994 — JUL 2006</div>
+            <div class="timeline-title">Lecturer / Assistant Professor — Govt. Girls College, Jhabua (M.P.)</div>
+            <div class="timeline-desc">Posted at Govt. Girls College, Jhabua from 28 July 1994 to 19 July 2006 — 12 years of dedicated service in a tribal district, teaching Economics at UG and PG levels.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">07 JUL 1994</div>
+            <div class="timeline-title">Career Begins — Govt. College, Sailana, Dist. Ratlam</div>
+            <div class="timeline-desc">First appointment at Govt. College, Sailana, District Ratlam (07.07.1994 to 27.07.1994) under the Department of Higher Education, Madhya Pradesh. Beginning of a 32+ year academic career.</div>
         </div>
     </div>
 </section>
@@ -1017,43 +831,22 @@
         <div class="contact-info">
             <div class="contact-row">
                 <svg class="c-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                <div>
-                    <div class="c-label">Email</div>
-                    <div class="c-value"><a href="mailto:profalkajain@gmail.com">profalkajain@gmail.com</a></div>
-                </div>
+                <div><div class="c-label">Email</div><div class="c-value"><a href="mailto:profalkajain@gmail.com">profalkajain@gmail.com</a></div></div>
             </div>
             <div class="contact-row">
                 <svg class="c-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-                <div>
-                    <div class="c-label">Phone</div>
-                    <div class="c-value">+91 94248-05448</div>
-                </div>
+                <div><div class="c-label">Phone</div><div class="c-value">+91 94248-05448</div></div>
             </div>
             <div class="contact-row">
                 <svg class="c-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                <div>
-                    <div class="c-label">Office Address</div>
-                    <div class="c-value">
-                        Department of Economics<br>
-                        PMCoE, Shri Atal Bihari Vajpayee<br>
-                        Govt. Arts &amp; Commerce College<br>
-                        A.B. Road, Mankareshwar Dhiraha<br>
-                        Indore — 452017, Madhya Pradesh, India
-                    </div>
-                </div>
+                <div><div class="c-label">Office Address</div><div class="c-value">Department of Economics<br>Prime Minister College of Excellence<br>Shri Atal Bihari Vajpayee Govt. Arts &amp; Commerce College<br>A.B. Road, Mankareshwar Dhiraha<br>Indore — 452017, Madhya Pradesh, India</div></div>
             </div>
             <div class="contact-row">
-                <svg class="c-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                <div>
-                    <div class="c-label">Residential Address</div>
-                    <div class="c-value">
-                        198, Sachchidanand Nagar, Keshar Bag Road<br>
-                        Indore — 452009, Madhya Pradesh, India
-                    </div>
-                </div>
+                <svg class="c-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                <div><div class="c-label">College Website</div><div class="c-value"><a href="http://www.sabvgacc.in" target="_blank">www.sabvgacc.in</a></div></div>
             </div>
         </div>
-        <div class="contact-map">
+        <div class="contact-quote">
             <div>
                 <p>"Education is not just about academic excellence, but the cultivation of moral, ethical, and spiritual values in students — aiming for their holistic development."</p>
                 <p style="font-size:0.85rem;margin-top:0.75rem;font-style:normal;color:var(--clr-accent);">— Dr. Alka Jain</p>
@@ -1062,11 +855,9 @@
     </div>
 </section>
 
-<!-- Footer -->
 <footer>
     <div class="footer-inner">
-        <p>&copy; 2025 <span class="footer-name">Dr. Alka Jain</span> &nbsp;·&nbsp; Associate Professor of Economics &nbsp;·&nbsp; PMCoE, SABV GACC, Indore</p>
-        <!-- <p style="margin-top:0.3rem;font-size:0.75rem;">Employee ID: 1731 &nbsp;|&nbsp; Treasury Code: 190002617</p> -->
+        <p>&copy; 2025 <span class="footer-name">Dr. Alka Jain</span> &nbsp;·&nbsp; Associate Professor of Economics &nbsp;·&nbsp; PMCoE, SABV Govt. Arts &amp; Commerce College, Indore</p>
     </div>
 </footer>
 
